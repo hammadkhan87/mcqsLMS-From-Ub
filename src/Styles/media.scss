@@ -1,0 +1,62 @@
+@mixin xldisplay() {
+  @media only screen and (min-width: "1620px") {
+    @content;
+  }
+}
+@mixin xxdisplay() {
+  @media only screen and (max-width: "1619px") {
+    @content;
+  }
+}
+@mixin xdisplay() {
+  @media only screen and (max-width: "1419px") {
+    @content;
+  }
+}
+@mixin display() {
+  @media only screen and (max-width: "1339px") {
+    @content;
+  }
+}
+@mixin xlaptop() {
+  @media only screen and (max-width: "1179px") {
+    @content;
+  }
+}
+@mixin laptop() {
+  @media only screen and (max-width: "1023px") {
+    @content;
+  }
+}
+@mixin xtablet() {
+  @media only screen and (max-width: "770px") {
+    @content;
+  }
+}
+@mixin tablet() {
+  @media only screen and (max-width: "639px") {
+    @content;
+  }
+}
+@mixin mobile {
+  @media only screen and (max-width: "474px") {
+    @content;
+  }
+}
+@mixin smobile {
+  @media only screen and (max-width: "350px") {
+    @content;
+  }
+}
+
+@mixin font($size, $weight, $spacing) {
+  font-size: $size;
+  font-weight: $weight;
+  letter-spacing: $spacing;
+}
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}

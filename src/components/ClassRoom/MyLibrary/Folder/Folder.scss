@@ -1,0 +1,69 @@
+@import "../../../../Styles/app.scss";
+.mylibrary_created {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .mylibrary_created_header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: $lightGray;
+    .mylibrary_created_header_title {
+      color: $black;
+      font-size: 20px;
+      font-weight: 700;
+      font-family: $family;
+    }
+    .mylibrary_created_header_dots {
+    }
+  }
+  .mylibrary_created_item {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+
+    background-color: $lightGray;
+    .mylibrary_created_item_img {
+      width: 70px;
+      height: 70px;
+      border: 2px solid $black;
+      margin-right: 20px;
+    }
+    .mylibrary_created_item_det {
+      position: relative;
+      flex: 1;
+      .mylibrary_created_item_det_dots {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      .mylibrary_created_item_det_header {
+        font-size: 12px;
+        color: lighten($color: $black, $amount: 20);
+        margin-bottom: 4px;
+      }
+      .mylibrary_created_item_det_name {
+        color: $black;
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .mylibrary_created_item_det_det {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin-bottom: 4px;
+        font-size: 12px;
+        color: lighten($color: $black, $amount: 20);
+      }
+      .mylibrary_created_item_det_name {
+        font-size: 12px;
+        color: lighten($color: $black, $amount: 20);
+      }
+    }
+  }
+}

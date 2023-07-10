@@ -1,0 +1,133 @@
+@import "../../../Styles/app.scss";
+
+.student-class-main-div {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  .side-bar-student-class {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 96%;
+    border-radius: 10px;
+
+    margin: 10px;
+    padding: 10px;
+    @include tablet{
+      display: none;
+    }
+
+    .side-image {
+      width: 170px;
+      margin: 10px;
+      object-fit: cover;
+      margin-top: 30px;
+      object-position: center;
+    }
+    .student-class-name {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: $blue;
+      margin-left: 15px;
+      color: gray;
+    }
+    .student-class-b-name {
+      margin-top: 10px;
+      font-size: 16px;
+      color: gray;
+      text-decoration: underline;
+      margin-left: 15px;
+    }
+    .student-class-s-name {
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: gray;
+      margin-left: 15px;
+    }
+    .student-class-t-name {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: gray;
+      margin-left: 15px;
+    }
+  }
+  .right-side-student-class {
+    margin: 10px;
+
+    border-radius: 10px;
+    padding: 10px;
+    width: 80%;
+    height: 96%;
+    @include tablet{
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+
+  }
+}
+.student_class_available_container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: auto;
+      overflow: scroll;
+      overflow-x: hidden;
+  .student_class_available {
+    background-color: $lightBlue;
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: flex;
+
+    @include tablet{
+      padding: 10px;
+    }
+    justify-content: space-between;
+    .student_class_available_left {
+      display: flex;
+      flex-direction: column;
+    }
+    .student_class_available_title {
+      font-size: 24px;
+      color: $black;
+    }
+    .student_class_available_time_title {
+      display: flex;
+      gap: 20px;
+      .student_class_available_time_title_start {
+        color: gray;
+      }
+      .student_class_available_time_title_end {
+        color: gray;
+        font-size: 15px;
+        display: flex;
+        gap: 10px;
+      }
+    }
+    .time {
+      display: flex;
+      gap: 20px;
+    }
+    .student_class_available_start {
+      color: gray;
+      display: flex;
+    }
+    .student_class_available_end {
+      color: gray;
+      display: flex;
+      font-size: 15px;
+    }
+  }
+}
+.student_class_available_container::-webkit-scrollbar{
+display: none;
+}
+.student_class_startbtn {
+  padding: 30px;
+  @include tablet{
+    padding: 10px;
+  }
+}

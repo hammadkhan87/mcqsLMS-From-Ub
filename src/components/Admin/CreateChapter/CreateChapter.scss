@@ -1,0 +1,117 @@
+@import "../../../Styles/app.scss";
+
+.main-div-a {
+  display: flex;
+  flex-direction: column;
+  background-color: $lightBlue;
+  border-radius: 20px;
+  padding: 20px;
+  border: 3px solid $blue;
+  font-family: $family;
+  // width: 100% !important;
+
+  .main-title {
+    text-align: center;
+    font-family: $family;
+    color: $blue;
+    line-height: 40px;
+  }
+  .select-book > h2 {
+    color: $blue;
+    margin: 10px;
+  }
+  .book-name {
+    span {
+      margin: 30px;
+      margin-left: 20px;
+      font-weight: 500;
+      font-size: 20px;
+      padding: 5px;
+      cursor: pointer;
+    }
+    span:hover {
+      border-bottom: 1px solid $blue;
+    }
+    .selected {
+      color: $blue;
+      border-bottom: 1px solid $blue;
+    }
+  }
+  .grade {
+    h2 {
+      color: $blue;
+      margin: 10px;
+    }
+    .opt-label {
+      display: inline-block;
+      text-align: center;
+      line-height: 50px;
+      height: 50px;
+      width: 50px;
+      font-size: 20px;
+      font-weight: 600;
+      flex-wrap: nowrap;
+    }
+    .opt-label:hover {
+      color: $blue;
+    }
+    .selected-grd {
+      border: 1px solid blue;
+      border-radius: 50%;
+      color: blue;
+    }
+    input {
+      all: unset;
+      border: none;
+      outline: none;
+    }
+  }
+  .input-div {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      color: $blue;
+      margin: 10px;
+    }
+    .chapter-input {
+      width: 300px;
+      height: 35px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .select {
+      width: 300px;
+      height: 35px;
+      border-radius: 7px;
+      border: 1px solid $black;
+      font-size: 18px;
+      text-align: center;
+    }
+    .label-rank {
+      font-size: 18px;
+      margin: 10px;
+    }
+  }
+  .btn {
+    float: right;
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid $black;
+    border-radius: 20px;
+    background-color: blue;
+    color:white
+  }
+  .btn:hover{
+    background-color: rgb(22, 19, 216);
+  }
+
+  .MuiBox-root {
+    width: 100% !important;
+  }
+}
+#vertical-tabpanel-0,
+#vertical-tabpanel-1 {
+  width: 86%;
+}

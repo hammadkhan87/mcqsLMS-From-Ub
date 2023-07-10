@@ -1,0 +1,44 @@
+@import "../../../Styles/app.scss";
+.reviews_container {
+  width: 100%;
+  background-color: $lightBlue;
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  font-family: $family;
+  border-radius: 20px;
+  @include xtablet {
+    flex-direction: column;
+  }
+  > div {
+    display: flex;
+    .reviews_img {
+      background-color: white;
+      padding: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 15px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+      }
+    }
+    .reviews_cont {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .reviews_cont_title {
+        font-size: 35px;
+        color: $blue;
+        font-weight: 800;
+      }
+      .reviews_cont_des {
+        font-size: 19px;
+        color: $blue;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import "../../../../../Styles/app.scss";
+
+.Quiz-main-div{
+     height: 100%;
+     @include tablet{
+          width: 100%;
+     }
+     .css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
+          @include tablet{
+          padding: 5px !important;
+          }
+     }
+}

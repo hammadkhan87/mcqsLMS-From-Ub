@@ -1,0 +1,70 @@
+@import "../../../../../../Styles/app.scss";
+.div-of-div-b{
+    overflow-y: auto;
+    overflow:scroll;
+    overflow-x:hidden;
+
+.main-div-quizes-p{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    align-items: center;
+    @include tablet{
+        padding: 5px;
+    }
+    .inner-class-div-a-p{
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px;
+        width: 80%;
+        height: 60px;
+        @include tablet{
+            width: 100%;
+            height: auto;
+        }
+        // border: 1px solid $blue;
+        border-radius: 5px;
+        background-color: rgb(245, 196, 196);
+        box-shadow: rgba(0, 0, 0, 0.10) 0px 3px 8px;
+
+        .inner-class-bar-a-p{
+            padding: 5px;
+            display: flex;
+            width: 80%;
+            cursor: pointer;
+            .single-class-name-a{
+                   font-size: 18px;
+                   margin-left: 10px;
+                   color: $blue;
+                   font-weight: bold;
+            }
+            
+        }
+        .show-student-text-a-p{
+            padding: 5px;
+            margin-left: 10px;
+            font-size: 14px;
+            color: gray;
+            font-weight: 400;
+
+        }
+        .show-student-text-b-p{
+            padding: 5px;
+            margin-left: 10px;
+            font-size: 14px;
+            color: gray;
+            font-weight: 400;
+
+        }
+    }
+    .menuItem {
+        font-size: 12px;
+      }
+}
+}
+.div-of-div-b::-webkit-scrollbar{
+    display: none;
+}

@@ -1,0 +1,45 @@
+.type-result{
+  display: flex;
+  width: 550px;
+  margin: 10px;
+  justify-content: space-between;
+  text-align: end;
+ span{
+    display: inline !important;
+ }
+ .btn-cancle {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+}
+.btn-submit{
+  margin-top: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+} 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 10px;
+   
+    button {
+      width: 50px;
+      height: 60px;
+      background-color: lightblue;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      justify-content: center;
+      border-radius: 5px;
+    }
+    button:hover{
+        background-color: cadetblue;
+    }
+  }

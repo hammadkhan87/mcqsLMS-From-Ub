@@ -1,0 +1,205 @@
+@import "../../Styles/app.scss";
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-family: "inter";
+  height: 100vh;
+  width: 100%;
+  margin: 50px 0px;
+@include xtablet{
+  padding: 20px;
+}
+ 
+  .right-side {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @include xtablet {
+      width: 100%;
+    }
+    .inner-content {
+      // margin-right: 30%;
+      @include xtablet {
+        width: 100%;
+      }
+    }
+    .signup_select {
+      width: 300px;
+      height: 35px;
+      border-radius: 7px;
+      border: 1px solid rgba(0, 0, 0, 0.29);
+      margin-bottom: 20px;
+      @include xtablet {
+        width: 100%;
+      }
+    }
+    .already {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+      p {
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.29);
+      }
+      button {
+        all: unset;
+        color: rgba(0, 0, 0, 0.29);
+        text-align: center;
+        margin-left: 5px;
+        font-weight: 500;
+        width: 60px;
+        height: 20px;
+        border: 1px solid $blue;
+        border-radius: 15px;
+      }
+    }
+
+    .mirow_form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .mirow_form_main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        label {
+          font-size: 12px;
+          font-weight: 600;
+          margin-top: 10px;
+          margin-bottom: 5px;
+          color: rgba(0, 0, 0, 0.29);
+          @include xtablet {
+            width: 100%;
+          }
+        }
+        > input {
+          height: 45px;
+          padding-left: 10px;
+          border: 1px solid rgba(0, 0, 0, 0.29);
+          border-radius: 20px;
+          margin-bottom: 20px;
+          @include xtablet {
+            width: 100%;
+          }
+        }
+        .terms {
+          // color: blue;
+          margin-bottom: 20px;
+          .__terms {
+            color: $blue;
+          }
+        }
+      }
+
+      .btn_original {
+        all: unset;
+        margin-top: 20px;
+        padding: 10px 30px;
+        border-radius: 50px;
+        width: 100%;
+        background-color: $blue;
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        margin: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        @include xtablet {
+          margin: 0px;
+          box-sizing: border-box;
+         
+        }
+
+        
+      }
+      .form_line{
+
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+        gap: 4px;
+        padding:0px 10px;
+        @include tablet{
+          width: 100%;
+
+        }
+      .__line {
+        flex: 1;
+        height: 2px;
+        background-color: rgba(104, 99, 99, 0.644);
+      }
+      .or_line {
+        color: gray;
+        font-size: 14px;
+      }
+    }
+      .btn_google {
+        all: unset;
+        padding: 10px 30px;
+        border-radius: 50px;
+        background-color: $lightBlue;
+        font-weight: 500;
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        @include tablet {
+          box-sizing: border-box;
+        }
+      }
+      .btn_forget {
+        all: unset;
+        margin-top: 0px;
+        color: rgb(97, 93, 93);
+        cursor: pointer;
+        padding: 0px 0px;
+        margin-left: auto;
+        margin-bottom: 20px;
+        @include xtablet {
+          width: 100%;
+          margin: 0px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: "730px") {
+    flex-direction: column;
+    .left-side {
+      flex-direction: row;
+
+      align-items: center;
+    }
+    .right-side {
+      align-items: center;
+      justify-content: center;
+      .inner-content {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.form_inner-content-title {
+  font-size: 30px !important;
+}
+.inner-content-2_title_p {
+  margin-top: 10px;
+  color: gray;
+  font-weight: 500;
+  margin-bottom: 20px;
+}

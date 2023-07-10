@@ -1,0 +1,71 @@
+@import "../../../../../../../Styles/app.scss";
+
+.main_class_result_container{
+
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   .result_class_available_container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    @include tablet {
+      margin: 0 10px;
+    }
+    .reluts_heading{
+        justify-self: flex-start;
+        align-self: flex-start;
+        margin-left: 20px;
+    }
+    .result_class_available {
+      background-color: $lightBlue;
+      border-radius: 30px;
+      padding: 10px 20px;
+      display: flex;
+      width: 80%;
+      @include tablet{
+        width: 100%;
+      }
+      justify-content: space-between;
+      .result_class_available_left {
+        display: flex;
+        flex-direction: column;
+      }
+      .result_class_available_title {
+        font-size: 24px;
+        color: $black;
+      }
+      .result_class_available_time_title {
+        display: flex;
+        gap: 20px;
+        .result_class_available_time_title_start {
+          color: gray;
+        }
+        .result_class_available_time_title_end {
+          color: gray;
+          font-size: 15px;
+          display: flex;
+          gap: 10px;
+        }
+      }
+      .time {
+        display: flex;
+        gap: 20px;
+      }
+      .result_class_available_start {
+        color: gray;
+        display: flex;
+      }
+      .result_class_available_end {
+        color: gray;
+        display: flex;
+        font-size: 15px;
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+@import "../../Styles/app.scss";
+
+.right-side_btn {
+  font-family: $family !important;
+  p {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: $family !important;
+    // color: white;
+  }
+}
+.right_side_signup {
+  background-color: $blue;
+  color: $lightBlue;
+  border-radius: 30px;
+  padding: 0px 16px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.right_side_create {
+  background-color: $blue;
+  color: $lightBlue;
+  border-radius: 30px;
+  padding: 0px 16px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.header_inner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  // width: 500px;
+  height: 400px;
+
+  .header_inner-content-2 {
+    font-size: 30px;
+    text-align: center;
+  }
+  .header_form {
+    display: flex;
+    flex-direction: column;
+    .header_label {
+      text-align: center;
+    }
+    .header_form_el {
+      width: 100%;
+      border: 1px solid $blue;
+      border-radius: 20px;
+      height: 50px;
+      padding: 0px 10px;
+      font-size: 16px;
+      margin-top: 7px;
+    }
+    .header_btn {
+      background-color: $blue;
+      padding: 15px 50px;
+      color: $lightGray;
+      border-radius: 30px;
+      font-size: 18px;
+      margin-top: 35px;
+      text-align: center;
+    }
+  }
+}
+.header_sidebar_title {
+  // margin-top: 20px;
+  width: fit-content;
+
+  .header_sidebar_title_heading {
+    color: $black;
+    font-size: 24px;
+    font-family: $family;
+    font-weight: 800;
+    line-height: 22px;
+  }
+  .header_sidebar_title_sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .header_sidebar_title_sub_line {
+      background-color: $blue;
+      height: 5px;
+      width: 30px;
+      border-radius: 4px;
+    }
+    .header_sidebar_title_sub_text {
+      font-size: 12px;
+      font-weight: 800;
+      font-family: $family;
+    }
+  }
+}

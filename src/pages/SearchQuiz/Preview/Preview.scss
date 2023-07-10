@@ -1,0 +1,310 @@
+@import "../../../Styles/app.scss";
+
+.preview-main-container {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: $lightBlue;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  padding: 10px;
+  overflow-y: scroll;
+
+  .inner-preview-container {
+    display: flex;
+    flex-direction: column;
+    background-color: $lightBlue;
+    border-radius: 3px;
+    width: 100%;
+    height: fit-content;
+    .inner-preview-container_header {
+      display: flex;
+      background-color: $lightGray;
+      padding: 10px;
+      position: relative;
+      @include tablet {
+        flex-direction: row;
+      }
+      .inner-preview-container_header_icon {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+      .inner-preview-container_header_img {
+        width: 200px;
+        height: 200px;
+        background-color: $blue;
+        @include tablet {
+          width: 100px;
+          height: 100px;
+        }
+        .inner-preview-container_header_img_el {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    .lesson-detail {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      .lesson-name-e {
+        font-size: 30px;
+        font-weight: 700;
+        color: $blue;
+        text-align: center;
+        margin-top: 30px;
+      }
+      .teacher-name {
+        font-size: 12px;
+        color: gray;
+      }
+      .right_container {
+        display: flex;
+        flex-direction: column;
+        .top_div {
+          margin-top: 30px;
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          @include tablet {
+            flex-direction: column;
+          }
+          .play-btn {
+            margin-left: 10px;
+            background-color: $blue;
+            border: none;
+            color: white;
+            width: 200px;
+            height: 40px;
+            font-size: 1rem;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            @include tablet {
+              width: 200px;
+            }
+          }
+          .play-btn:hover {
+            background-color: darken($color: $blue, $amount: 10);
+          }
+          .save-btn {
+            margin-left: 10px;
+            background-color: white;
+            border: none;
+            color: gray;
+            width: 200px;
+            height: 40px;
+            font-size: 1rem;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            @include tablet {
+              width: 200px;
+            }
+          }
+        }
+        .bottom-div {
+          margin: 10px;
+          display: flex;
+          justify-content: flex-end;
+          @include tablet {
+            margin: 0px;
+          }
+          .play-btn {
+            display: block;
+            margin-left: 10px;
+            background-color: $blue;
+            border: none;
+            color: white;
+            width: 100px;
+            height: 40px;
+            font-size: 1rem;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            @include tablet {
+              width: 200px;
+            }
+          }
+          .play-btn:hover {
+            background-color: darken($color: $blue, $amount: 10);
+          }
+          .save-btn {
+            margin-left: 10px;
+            background-color: white;
+            border: none;
+            color: gray;
+            width: 100px;
+            height: 40px;
+            font-size: 1rem;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            @include tablet {
+              width: 200px;
+            }
+          }
+        }
+      }
+    }
+    .show-question-min {
+      padding: 10px;
+      margin-top: 10px;
+      background-color: $lightGray;
+      display: flex;
+      align-items: center;
+      .correct-ans {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 400;
+        color: gray;
+        input[type="checkbox"] {
+          margin-right: 5px;
+        }
+      }
+      .show-question-min_div {
+        display: flex;
+        flex-direction: column;
+        .show-question-min_select {
+          padding: 8px 24px;
+          border-radius: 20px;
+        }
+      }
+      .selection-div {
+        background-color: $blue;
+        padding: 10px 20px;
+        color: $lightGray;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+  .show-question-div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 10px;
+
+    .single_question {
+      background-color: $lightGray;
+      padding: 10px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      .single_question_header {
+        color: gray;
+        display: flex;
+        justify-content: space-between;
+      }
+      .single_question_body {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 10px 0px;
+        .single_question_body_img {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+      }
+      .single_question_footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 10px 0px;
+        .single_question_footer_option {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+
+          .single_question_footer_option_img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+  .inner-preview-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.css-1wnsr1i {
+  @include tablet {
+    width: 100% !important;
+  }
+}
+.preview_modal_container {
+  .preview_modal_container_header {
+    text-align: center;
+    font-weight: 900;
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
+  .preview_modal_container_body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .preview_modal_container_body_item1 {
+      display: flex;
+      justify-content: space-between;
+      .preview_modal_container_body_code {
+        display: flex;
+        flex-direction: column;
+        .preview_modal_container_body_code_up {
+          color: $black;
+          font-size: 20px;
+          display: flex;
+          font-family: 600;
+          .preview_modal_container_body_code_up_c {
+            color: gray;
+          }
+        }
+        .preview_modal_container_body_code_down {
+          font-size: 15px;
+          color: gray;
+        }
+      }
+      .preview_modal_container_body_code_right {
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+    .preview_modal_container_body_item2 {
+      display: flex;
+      flex-direction: column;
+      .preview_modal_container_body_item2_up {
+        color: $black;
+        font-size: 18px;
+      }
+      .preview_modal_container_body_item2_don {
+        color: gray;
+      }
+    }
+  }
+  .preview_modal_container_footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    .preview_modal_container_footer_close {
+      background-color: $blue;
+      color: $lightGray;
+      font-size: 18px;
+      padding: 18px 30px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  }
+}

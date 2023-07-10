@@ -1,0 +1,61 @@
+@import "../../../Styles/app.scss";
+.card-main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #a8c0ff, #ffffff);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  
+    .title-div {
+      text-align: center;
+      margin-bottom: 20px;
+      .class-title{
+        font-size: 18px;
+        font-weight: bold;
+        color: $purple;
+
+        margin: 5px 0;
+      }
+      .class-name{
+        font-size: 18px;
+        font-weight: bold;
+        color: $blue;
+
+        margin: 5px 0;
+      }
+      .teacher-name{
+        font-size: 18px;
+        margin: 5px 0;
+      }
+  
+      
+    }
+  
+    button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #2288cc;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .card-main-div {
+      max-width: 100%;
+    }
+  }
+  

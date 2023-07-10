@@ -1,0 +1,68 @@
+@import "../../../Styles/app.scss";
+.questions_container {
+  width: 100%;
+  height: auto;
+  background-color: $lightBlue;
+  .questions_question {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    text-align: center;
+    padding: 50px;
+    color: $lightBlue;
+    font-weight: 700;
+    font-size: 30px;
+    background-color: darken($color: $blue, $amount: 40);
+  }
+  .answers {
+    width: 100%;
+    display: grid;
+    font-size: 27px;
+    font-weight: 600;
+
+    color: $lightBlue;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .answer0 {
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    cursor: pointer;
+  }
+  .answer1 {
+    background-color: rgb(29, 123, 167);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .answer2 {
+    background-color: rgb(14, 175, 62);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .answer3 {
+    background-color: rgb(226, 223, 43);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .answer4 {
+    background-color: rgb(226, 43, 98);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,73 @@
+@import "../../../../../../../Styles/app.scss";
+
+
+
+    .main-div-quizes{
+        display: flex;
+        padding: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        @include tablet{
+            padding: 5px;
+        }
+        overflow:scroll;
+        overflow-x:hidden;
+
+        .inner-class-div-a{
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px;
+            width: 80%;
+            @include xtablet{
+                width:100%;
+                height: auto;
+                margin: 2px;
+            }
+            height: 60px;
+            // border: 1px solid $blue;
+            border-radius: 5px;
+            background-color: rgb(208, 225, 248);
+            box-shadow: rgba(0, 0, 0, 0.10) 0px 3px 8px;
+
+            .inner-class-bar-a{
+                padding: 5px;
+                display: flex;
+                width: 80%;
+                @include tablet{
+                    width: 100%;
+                }
+                cursor: pointer;
+                .single-class-name-a{
+                       font-size: 18px;
+                       margin-left: 10px;
+                       color: $blue;
+                       font-weight: bold;
+                }
+                
+            }
+            .show-student-text-a{
+                padding: 5px;
+                margin-left: 10px;
+                font-size: 14px;
+                color: gray;
+                font-weight: 400;
+
+            }
+            .show-student-text-b{
+                padding: 5px;
+                margin-left: 10px;
+                font-size: 14px;
+                color: gray;
+                font-weight: 400;
+
+            }
+        }
+        .menuItem {
+            font-size: 12px;
+          }
+    }
+    .main-div-quizes::-webkit-scrollbar{
+        display: none;
+    }

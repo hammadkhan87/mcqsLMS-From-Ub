@@ -1,0 +1,92 @@
+@import "../../../Styles/app.scss";
+
+.class-main-div {
+  flex: 1;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  .main-bar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    .classroom_sidebar_title_menu{
+      display: none; // Hide the div by default
+
+      @media (max-width: 640px) {
+        display: block; // Show the div when the width is 640px or less
+      }
+        
+      
+    }
+    .my-text {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .create-class-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: $blue;
+      color: white;
+      border-radius: 10px;
+    }
+  }
+  .class-main {
+    display: flex;
+    padding: 20px;
+   @include tablet{
+    padding: 10px;
+   } 
+
+    flex-wrap: wrap;
+    .inner-class-div {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      width: 31%;
+      
+      height: 100px;
+      // border: 1px solid $blue;
+      border-radius: 5px;
+      background-color: $lightGray;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+      @include tablet{
+        width: 40%;
+        height: 80px;
+      }
+
+      .inner-class-bar {
+        
+        padding: 10px;
+        display: flex;
+        width: 80%;
+        flex-wrap: wrap;
+        @include tablet{
+          width: 100%;
+        }
+        cursor: pointer;
+        flex-direction: column;
+        .single-class-name {
+          font-size: 16px;
+          color: $blue;
+          font-weight: bold;
+        }
+      }
+      .show-student-text {
+        margin-top: 20px;
+        font-size: 14px;
+        color: gray;
+        font-weight: 400;
+        @include tablet{
+          margin-top: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+    .menuItem {
+      font-size: 12px;
+    }
+  }
+}

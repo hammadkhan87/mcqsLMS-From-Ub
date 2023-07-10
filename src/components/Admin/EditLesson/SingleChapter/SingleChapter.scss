@@ -1,0 +1,119 @@
+@import "../../../../Styles/app.scss";
+
+.selfsinglechapter_container {
+  .selfsinglechapter_container_heading {
+    font-size: 23px;
+    color: $black;
+    text-transform: capitalize;
+    font-family: $family;
+    .chp-delete {
+      padding: 5px 10px;
+      font-size: 12px;
+      color: white;
+      margin: 0 10px;
+      border-radius: 5px;
+      background-color: red;
+      float: right;
+    }
+  }
+  .selfsinglechapter_container_heading_lessons {
+    font-family: $family;
+
+    display: flex;
+    flex-direction: column;
+    .innerSingleChapter_container {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0px;
+      .lesson_name_p{
+        color: $blue;
+        font-size: 18px;
+        font-family: $family;
+        margin-left: 8px;
+        margin-top: 4px;
+        list-style: circle;
+      }
+      .btnac {
+        float: right;
+        padding: 5px 10px;
+        font-size: 12px;
+        color: white;
+        margin: 0 5px;
+        border-radius: 5px;
+      }
+      .btne-edit {
+        background-color: $blue;
+      }
+      .btne-delete {
+        background-color: red;
+      }
+    }
+
+    .selfsinglechapter_container_lesson {
+      cursor: pointer;
+    }
+  }
+}
+
+.self_modal {
+  display: flex;
+  flex-direction: column;
+  .self_modal_header {
+    width: 100%;
+    height: 200px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .self_modal_body {
+    display: flex;
+    flex-direction: column;
+    input {
+      margin: 5px;
+      border: 1px solid black;
+      width: 300px;
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+  }
+  .self_modal_body_difficulty {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    .btnb {
+      padding: 10px 15px;
+      border-radius: 7px;
+    }
+    .btn-update {
+      background-color: $blue;
+      color: white;
+    }
+    .btn-cancle {
+      background-color: red;
+      color: white;
+    }
+  }
+  .self_modal_body_length {
+    font-size: 27px;
+  }
+  .self_modal_body_play {
+    font-size: 27px;
+    background-color: $blue;
+    color: $lightGray;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-weight: 600;
+  }
+}
+
+.ant-modal-footer {
+  display: none;
+}
+
+a:hover {
+  text-decoration: none;
+}

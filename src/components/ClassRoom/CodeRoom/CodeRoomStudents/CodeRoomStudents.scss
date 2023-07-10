@@ -1,0 +1,148 @@
+@import "../../../../Styles/app.scss";
+.coderoom_students_container {
+  flex: 1;
+  background-color: $lightBlue;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  gap: 50px;
+  @include xtablet {
+    width: 100%;
+    padding: 20px;
+    flex-direction: column;
+  }
+  .coderoom_students_container_students {
+    width: 500px;
+    height: fit-content;
+    background-color: $lightGray;
+    border-radius: 30px;
+    padding: 40px;
+    @include xtablet {
+      width: 100%;
+    }
+    .coderoom_students_container_students_header {
+      color: $black;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: $family;
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      gap: 10px;
+      .coderoom_students_container_students_header_back{
+        // display: none;
+        cursor: pointer;
+        @include xtablet{
+          // display: block;
+        }
+      }
+    }
+    .coderoom_students_container_students_list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .coderoom_students_container_students_list_item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .coderoom_students_container_students_list_item_image {
+          font-size: 40px;
+        }
+        .coderoom_students_container_students_list_item_name {
+          font-size: 20px;
+        }
+        .coderoom_students_container_students_list_item_marks {
+          color: gray;
+          justify-content: flex-end;
+          justify-self: flex-end;
+          justify-items: flex-end;
+          margin-left: auto;
+        }
+      }
+    }
+  }
+  .coderoom_students_container_info {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    .coderoom_students_container_info_title {
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      border-radius: 30px;
+      background-color: $lightGray;
+      gap: 20px;
+      .coderoom_students_container_info_title_upper {
+        font-size: 22px;
+        color: $black;
+        font-weight: bold;
+      }
+      .coderoom_students_container_info_title_grade {
+        font-size: 14px;
+        color: $black;
+      }
+    }
+    .coderoom_students_container_info2 {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      .coderoom_students_container_info2_points {
+        display: flex;
+        flex-direction: column;
+        background-color: $lightGray;
+        border-radius: 20px;
+        padding: 30px;
+        @include xtablet {
+          width: 100%;
+        }
+        .coderoom_students_container_info2_points_heading {
+          font-size: 30px;
+          font-weight: bold;
+          color: $black;
+        }
+        .coderoom_students_container_info2_points_det {
+          font-size: 14px;
+          color: $black;
+        }
+      }
+      .coderoom_students_container_info2_duration {
+        display: flex;
+        flex-direction: column;
+        background-color: $lightGray;
+        border-radius: 20px;
+
+        padding: 30px;
+        .coderoom_students_container_info2_duration_heading {
+          color: $black;
+          font-size: 30px;
+          font-weight: bold;
+        }
+        .coderoom_students_container_info2_duration_det {
+          color: $black;
+          font-size: 14px;
+        }
+      }
+    }
+    .coderoom_students_container_info3 {
+      display: flex;
+      gap: 20px;
+      .coderoom_students_container_info3_start {
+        padding: 15px 40px;
+        background-color: $blue;
+        color: $lightGray;
+        font-size: 18px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      .coderoom_students_container_info3_end {
+        padding: 15px 40px;
+        background-color: $blue;
+        color: $lightGray;
+        font-size: 18px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import "../../../Styles/app.scss";
+.classroom_mylibrary {
+  flex: 1;
+  background-color: $lightGray;
+  padding: 40px;
+  @include tablet {
+    padding: 20px;
+    width: 100%;
+  }
+  .classroom_mylibrary_header {
+    color: $black;
+    font-size: 30px;
+    font-weight: 900;
+    margin-left: 17px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .classroom_mylibrary_body {
+    display: flex;
+    gap: 20px;
+    @include tablet {
+      gap: 5px;
+    }
+  }
+}
+.mylibrary_sidebar_title_menu {
+  font-size: 30px;
+
+  display: none;
+
+  cursor: pointer;
+  @include xtablet {
+    display: block;
+  }
+}

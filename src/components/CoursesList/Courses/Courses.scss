@@ -1,0 +1,52 @@
+@import "../../../Styles/app.scss";
+
+.courses_container {
+  width: 100%;
+  font-family: $family;
+  margin-top: 40px;
+  .course {
+    display: flex;
+    flex-direction: column;
+    .course_upper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      .course_upper_title {
+        font-weight: 800;
+        color: $black;
+        font-size: 24px;
+        text-transform: capitalize;
+        font-family: $family;
+      }
+      .course_upper_btn {
+        font-weight: 700;
+        color: $blue;
+        font-family: $family;
+        text-decoration: dashed;
+      }
+    }
+    .course_list {
+      width: 100%;
+      display: grid;
+
+      gap: 20px;
+      grid-template-columns: 1fr 1fr 1fr;
+      @include xtablet {
+        grid-template-columns: 1fr 1fr;
+      }
+      @include tablet {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+  }
+}
+a {
+  // text-decoration: none;
+}
+.course_upper_btn_link {
+  // text-decoration: none;
+  text-decoration: underline !important;
+  padding-bottom: 5px;
+}

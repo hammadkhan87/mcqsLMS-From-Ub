@@ -1,0 +1,103 @@
+@import "../../Styles/app.scss";
+.self_ground_container {
+  display: flex;
+  flex-direction: column;
+  background-color: $blue;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  @include tablet{
+    padding: 20px;
+  }
+  .self_ground_container_block {
+    padding: 30px;
+    width: 600px;
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px black;
+    flex-direction: column;
+    background-color: darken($color: $blue, $amount: 30);
+    margin-left: auto;
+    margin-right: auto;
+
+    @include tablet {
+      width: 100%;
+    }
+    .self_ground_total {
+      color: $lightGray;
+      font-size: 27px;
+      font-weight: bold;
+      font-family: $family;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .self_ground_title {
+      color: $lightGray;
+      font-size: 27px;
+      font-weight: bold;
+      font-family: $family;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .self_ground_play {
+      background-color: $lightBlue;
+      color: $blue;
+      font-size: 27px;
+      font-weight: bold;
+      font-family: $family;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      padding: 20px;
+    }
+    .self_ground_des {
+      color: $lightGray;
+      font-size: 21px;
+      font-weight: 500;
+      font-family: $family;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .self_ground_btns {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .self_ground_reg {
+      background-color: $lightBlue;
+      color: $blue;
+      font-size: 27px;
+      font-weight: bold;
+      font-family: $family;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      padding: 20px 28px;
+      // flex: 1;
+    }
+    .self_ground_or {
+      color: $lightGray;
+      font-size: 28px;
+    }
+  }
+}
+.self_ground_reg_reg {
+  background-color: $blue !important;
+  color: $lightGray !important;
+}
+a:hover {
+  text-decoration: none;
+}
+.selected {
+  border: 5px solid green;
+}

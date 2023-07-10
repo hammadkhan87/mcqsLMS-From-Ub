@@ -1,0 +1,152 @@
+@import "../../../Styles/app.scss";
+.classroom_sidebar {
+  width: 250px;
+  height: auto;
+  background-color: $lightGray;
+  padding: 0px 20px;
+  margin-bottom: 100px;
+  .classroom_sidebar_title_menu {
+    font-size: 30px;
+    margin-top: 20px;
+    display: none;
+    cursor: pointer;
+    @include xtablet {
+      display: block;
+    }
+  }
+  .classroom_sidebar_title {
+    margin-top: 20px;
+    width: fit-content;
+
+    .classroom_sidebar_title_heading {
+      color: $black;
+      font-size: 30px;
+      font-family: $family;
+      font-weight: 800;
+      line-height: 22px;
+    }
+    .classroom_sidebar_title_sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .classroom_sidebar_title_sub_line {
+        background-color: $blue;
+        height: 5px;
+        width: 50px;
+        border-radius: 4px;
+      }
+      .classroom_sidebar_title_sub_text {
+        font-size: 12px;
+        font-weight: 800;
+        font-family: $family;
+      }
+    }
+  }
+  .classroom_sidebar_aid {
+    background-color: $blue;
+    color: $lightBlue;
+    text-align: justify;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 30px 0px 0px 0px;
+    width: 100%;
+    position: relative;
+    .classroom_sidebar_aid_img {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+    }
+  }
+  .classroom_sidebar_main {
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .classroom_sidebar_main_item_create {
+      width: 100%;
+      font-size: 16px;
+      font-weight: 400;
+
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px 10px 10px 20px;
+      background-color: $blue;
+      border-radius: 20px;
+      color: $lightBlue !important;
+      margin-top: 40px;
+      &:hover {
+        text-decoration: none;
+      }
+      .classroom_sidebar_main_title {
+        margin: 0px 0px 0px 20px;
+      }
+    }
+    .classroom_sidebar_main_item {
+      width: 100%;
+      font-size: 16px;
+      font-weight: 400;
+
+      display: flex;
+      align-items: center;
+      color: gray;
+      margin-bottom: 15px;
+      padding: 10px 10px 10px 20px;
+      &:hover {
+        background-color: $blue;
+        border-radius: 20px;
+        color: $lightBlue !important;
+      }
+      .classroom_sidebar_main_title {
+        margin: 0px 0px 0px 20px;
+      }
+    }
+  }
+}
+.sidebar_logout {
+  margin-top: 30px;
+}
+.sidebar_create_class {
+  background-color: $blue !important;
+  border-radius: 20px;
+  color: $lightBlue !important;
+  padding: 13px 0px !important;
+  padding: 15px 10px 15px 10px !important;
+  border-radius: 30px !important;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  .classroom_sidebar_main_title {
+    margin: 0px 0px 0px 0px !important;
+    text-align: center;
+  }
+}
+a {
+  text-decoration: none;
+}
+.sidebar_item_icon {
+  font-size: 22px;
+}
+.active {
+  background-color: $blue;
+  border-radius: 20px;
+  color: $lightBlue !important;
+}
+
+.big_sidebar {
+  @include tablet {
+    display: none;
+  }
+}

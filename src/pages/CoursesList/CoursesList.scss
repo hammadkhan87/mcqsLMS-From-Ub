@@ -1,0 +1,42 @@
+@import "../../Styles/app.scss";
+.courseslist_container {
+  width: 100%;
+  padding: 20px 60px;
+  background-color: $lightGray;
+  font-family: $family;
+  @include xtablet {
+    padding: 20px 40px;
+  }
+  @include tablet {
+    padding: 20px 20px;
+  }
+  .courseslist_container_header {
+    width: 100%;
+    color: $blue;
+    font-size: 40px;
+    margin: 30px 0px;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-family: $family;
+  }
+  .courseslist_container_body {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    @include xtablet {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+  .courseslist_container_footer {
+    display: flex;
+    justify-content: center;
+
+  }
+}
+a{
+  text-decoration: none;
+}

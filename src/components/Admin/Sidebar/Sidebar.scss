@@ -1,0 +1,33 @@
+@import "../../../Styles/app.scss";
+
+
+.selfstudy_container_sidebar {
+  // width: 100px;
+  background-color: $blue;
+  padding: 20px 10px;
+  .class1_title {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid $lightGray;
+  }
+  > div {
+    width: 100px;
+    height: 30px;
+    background-color: $blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $lightBlue;
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 20px 5px;
+  }
+  .active {
+    background-color: darken($color: $blue, $amount: 10);
+    // color: $blue;
+    border-radius: 6px;
+  }
+}

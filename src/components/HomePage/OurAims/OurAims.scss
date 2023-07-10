@@ -1,0 +1,32 @@
+@import "../../../Styles/app.scss";
+.ouraims_container {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-image: url(../../../assets/premium_photo-1673971700988-346588461fa7.jpg);
+  .ouraims_container_wrapper {
+    backdrop-filter: blur(10px) brightness(60%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    .ouraims_container_title {
+      color: $lightGray;
+      font-size: 50px;
+      font-weight: 700;
+      font-family: $family;
+    }
+    .ouraims_container_text {
+      color: $lightGray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: $family;
+      font-weight: 500;
+      font-size: 25px;
+    }
+  }
+}

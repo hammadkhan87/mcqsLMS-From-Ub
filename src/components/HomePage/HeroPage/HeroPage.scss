@@ -1,0 +1,164 @@
+@import "../../../Styles/app.scss";
+.heropage_container {
+  width: 100%;
+  margin-top: 60px;
+
+  display: flex;
+  @include xtablet {
+    flex-direction: column;
+  }
+
+  .heropage_content {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+
+    color: $black;
+    font-family: $family;
+    padding: 0px 50px;
+    @include xlaptop {
+      width: 50%;
+    }
+    @include laptop {
+      padding: 0px 40px;
+    }
+    @include xtablet {
+      width: 100%;
+      padding: 0px 0px;
+    }
+    .heropage_content_heading {
+      font-weight: 800;
+      font-size: 35px;
+      margin-bottom: 30px;
+      margin-top: 50px;
+      text-transform: capitalize !important;
+      @include laptop {
+        font-size: 30px;
+      }
+      @include xtablet {
+        font-size: 28px;
+      }
+
+      .special_words {
+        color: $blue;
+      }
+    }
+    .heropage_content_des {
+      font-size: 16px;
+      color: lighten($black, $amount: 30);
+      margin-bottom: 30px;
+      text-transform: capitalize !important;
+    }
+    .heropage_content_form {
+      display: flex;
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: $lightBlue;
+      border-radius: 30px;
+      padding: 7px;
+      justify-content: space-between;
+    }
+    .heropage_content_input {
+      all: unset;
+      box-sizing: border-box;
+      width: 75%;
+      height: 50px;
+      padding: 0px 20px;
+
+      color: lighten($blue, $amount: 0);
+      ::placeholder {
+        font-weight: bold;
+        color: red;
+      }
+    }
+    .heropage_content_btn {
+      width: 25%;
+      text-align: center;
+
+      // padding: 0px 30px;
+      background-color: $blue;
+      border-radius: 30px;
+      color: $lightBlue;
+      height: 50px;
+      line-height: 50px;
+    }
+    .heropage_content_placeholder {
+      margin-bottom: 100px;
+      padding: 0px 20px;
+    }
+  }
+  .heropage_img {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+
+    @include xlaptop {
+      width: 50%;
+    }
+    @include xtablet {
+      width: 100%;
+    }
+  }
+}
+
+.modal_main_box {
+  .hero_modal_container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .hero_modal_container_header {
+      font-size: 25px;
+      font-weight: bold;
+      font-family: $family;
+      text-align: center;
+    }
+    .hero_modal_container_header2 {
+      display: flex;
+      gap: 20px;
+      width: 80%;
+      margin: auto;
+
+      .hero_modal_container_header2_line {
+        width: 3px;
+        background-color: $blue;
+      }
+      .hero_modal_container_header2_title {
+        color: $black;
+      }
+    }
+    .hero_modal_container_body {
+      .hero_modal_container_body_input_container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .hero_modal_container_body_input_container_user {
+        }
+        .hero_modal_container_body_input_container_el {
+          width: 100%;
+          height: 30px;
+          background-color: $lightBlue;
+          border-radius: 5px;
+          padding: 27px 10px;
+        }
+      }
+    }
+    .hero_modal_container_footer {
+      .hero_modal_container_footer_btns {
+        .hero_modal_container_footer_close {
+          width: 80%;
+          padding: 20px;
+          text-align: center;
+          color: $lightGray;
+          background-color: $blue;
+          margin: auto;
+          border-radius: 40px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+input::placeholder {
+  color: lighten($black, $amount: 50);
+}

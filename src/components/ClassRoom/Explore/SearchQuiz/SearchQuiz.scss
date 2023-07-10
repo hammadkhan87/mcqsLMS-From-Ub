@@ -1,0 +1,340 @@
+@import "../../../../Styles/app.scss";
+
+.explore_search-quiz-main-container {
+  margin: 10px 20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  @include tablet {
+    padding: 0px 20px;
+    margin: 0px;
+    width: 100%;
+  }
+  .explore_search-title {
+    color: $blue;
+    height: 50px;
+    .explore_search-title_back {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+  }
+  .explore_search-bar-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .explore_search-bar {
+      display: flex;
+      align-items: center;
+      background-color: $lightBlue;
+      border-radius: 40px;
+      padding: 5px;
+      width: 100%;
+      margin-top: 10px;
+      @include mobile {
+        width: 100%;
+      }
+    }
+
+    .explore_search-input-container {
+      display: flex;
+      align-items: center;
+
+      border-radius: 40px;
+      padding: 5px;
+      width: 93%;
+      @include mobile {
+        width: 70%;
+      }
+    }
+
+    .explore_search-input {
+      flex: 1;
+      height: 30px;
+      border: none;
+      padding-left: 5px;
+      font-size: 16px;
+      background-color: $lightBlue;
+      @include mobile {
+        width: 60%;
+      }
+    }
+
+    .explore_search-icon {
+      margin-right: 5px;
+      color: $blue;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+    .explore_btn-icon {
+      margin-right: 5px;
+      margin-top: 5px;
+      font-size: 14px;
+      margin-left: 15px;
+    }
+
+    .explore_search-button {
+      margin-left: 10px;
+      background-color: $blue;
+      border: none;
+      color: white;
+      width: 100px;
+      height: 40px;
+      font-size: 1rem;
+      margin-left: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .explore_search-button:hover {
+      background-color: darken($color: $blue, $amount: 10);
+    }
+  }
+  .explore_inner-main-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+    @include mobile {
+      flex-wrap: wrap;
+    }
+
+    .explore_left-side-1 {
+      display: flex;
+      padding: 0 20px;
+      border-radius: 5px;
+      @include mobile {
+        padding: 0px;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      /* Other styles for the left-side-1 div */
+
+      .explore_filter-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 20px;
+        /* Other styles for the filter-section div */
+
+        h5 {
+          margin-top: 10px;
+          font-size: 20px; /* Reduced font size */
+          font-weight: bold;
+          color: gray;
+          @include tablet {
+            font-size: 14px;
+          }
+          /* Other styles for the heading */
+        }
+
+        .explore_filter-container {
+          display: flex;
+          margin-top: 15px;
+
+          // height: 20px !important;
+          overflow-y: auto; /* Add a vertical scroll bar */
+          scroll-behavior: smooth; /* Enable smooth scrolling */
+          /* Other styles for the filter-container div */
+          @include tablet {
+            // height: 100px;
+            overflow-y: auto; /* Add a vertical scroll bar */
+            scroll-behavior: smooth;
+            flex-wrap: wrap;
+          }
+
+          p {
+            font-size: 16px; /* Reduced font size */
+            font-weight: bold;
+            color: #555;
+            /* Other styles for the paragraph */
+            @include mobile {
+              font-size: 14px;
+            }
+          }
+
+          label {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-left: 22px;
+            font-size: 14px; /* Reduced font size */
+            color: #666;
+            /* Other styles for the label */
+            @include mobile {
+              flex-wrap: wrap;
+              font-size: 10px;
+            }
+
+            input[type="checkbox"] {
+              margin-right: 9px;
+              /* Other styles for the checkbox */
+              @include mobile {
+                margin-right: 4px;
+              }
+            }
+          }
+        }
+        .explore_filter-container::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+
+    .explore_left-side-container {
+      display: flex;
+      flex-direction: column;
+      margin-left: 15px;
+      width: 40%;
+      @include tablet {
+        width: 100%;
+      }
+
+      .explore_total-results {
+        width: 100%;
+        height: 10px;
+        align-items: center;
+        display: flex;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .explore_result-container {
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px;
+
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        height: 80vh;
+        overflow-y: auto;
+        .explore_result-card-main {
+          margin: 5px 0px 5px 0px;
+          border-radius: 50px;
+          padding: 10px;
+          width: 97%;
+          height: 90px;
+          // background-color: $lightBlue;
+          outline: 1px solid #f2f2f2;
+          display: flex;
+          @include tablet {
+            flex-direction: column;
+            flex-wrap: wrap;
+            height: auto;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .explore_div-img {
+            height: 100%;
+            width: 100px;
+
+            border-radius: 100px;
+
+            @include tablet {
+              height: 100px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .explore_lesson-img {
+              width: 70px;
+              height: 70px;
+
+              border-radius: 50%;
+              @include tablet {
+                margin: auto;
+              }
+            }
+          }
+          .explore_card-content {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            margin-left: 10px;
+            @include laptop {
+              flex-wrap: wrap;
+            }
+            @include tablet {
+              flex-wrap: wrap;
+            }
+            @include mobile {
+              padding: 3px;
+              margin-left: 5px;
+            }
+            .explore_lesson-name-text {
+              font-size: 16px;
+              font-weight: 700;
+              color: $blue;
+            }
+            .explore_inner-card-content {
+              display: flex;
+              // margin: 10px;
+              @include tablet {
+                flex-wrap: wrap;
+              }
+              @include mobile {
+                margin: 2px;
+              }
+
+              .explore_text-a {
+                height: 30px;
+                align-items: center;
+                align-items: center;
+                // margin-left: 10px;
+                font-size: 14px;
+                display: flex;
+                justify-content: center;
+
+                font-weight: 500;
+                p {
+                  margin-left: 5px;
+                  color: gray;
+                }
+                .explore_icon {
+                  margin-top: 2px;
+                  align-items: center;
+                  justify-content: center;
+                  color: $blue;
+                }
+              }
+            }
+          }
+        }
+        .explore_result-card-main:hover {
+          border: 1px solid $blue;
+          cursor: pointer;
+        }
+      }
+    }
+    .explore_result-container::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .explore_right-side-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    width: auto;
+    flex: 1;
+    @include tablet {
+      display: none;
+    }
+    .explore_text-Preview {
+      width: 100%;
+      height: 10px;
+      align-items: center;
+      display: flex;
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
+.explore_inner-main-container_bottom {
+  display: flex;
+  margin-top: 30px;
+}

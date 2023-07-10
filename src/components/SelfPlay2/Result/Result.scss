@@ -1,0 +1,41 @@
+@import "../../../Styles/app.scss";
+.quiz_result_container {
+  width: 100%;
+  position: relative;
+  background-color: $blue;
+  display: flex;
+  padding: 20px;
+  .quiz_result {
+    background-color: darken($color: $blue, $amount: 30);
+    width: 500px;
+    padding: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    color: $lightBlue;
+    margin: 60px auto;
+    gap: 30px;
+    .quiz_result_header {
+    }
+    .quiz_result_body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .quiz_result_body_btn {
+        padding: 10px 30px;
+        background-color: $lightGray;
+        color: $black;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.back_button {
+  position: absolute;
+  font-size: 30px;
+  cursor: pointer;
+  color: $lightGray;
+}

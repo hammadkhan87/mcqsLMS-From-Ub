@@ -1,0 +1,150 @@
+@import "../../../Styles/app.scss";
+.class_selfstudy_container_classroom {
+  flex: 1;
+  background-color: $lightGray;
+  display: flex;
+  // justify-content: center;
+  // align-items: center;
+  @include tablet {
+    width: 100%;
+    padding: 20px;
+  }
+  .class_selfstudy_container_classroom_main {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    @include tablet {
+      width: 100%;
+    }
+    .class_selfstudy_container_classroom_main_header {
+      width: 100%;
+
+      display: flex;
+      // align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      @include tablet{
+        padding: 0px;
+        margin: 10px 0px;
+      }
+      .class_selfstudy_container_classroom_main_header_total {
+        font-weight: bold;
+        font-size: 24px;
+        @include tablet{
+          font-size: 18px;
+        }
+      }
+      .class_selfstudy_container_classroom_main_header_btn {
+        padding: 10px 30px;
+        background-color: $blue;
+        font-size: 20px;
+        color: $lightGray;
+        border-radius: 30px;
+        cursor: pointer;
+        @include tablet{
+          font-size: 16px;
+          padding: 6px 20px;
+        }
+      }
+    }
+    .class_selfstudy_container_classroom_main_body {
+      background-color: $lightBlue;
+      border-radius: 20px;
+      .class_selfstudy_container_classroom_main_item {
+        display: flex;
+        padding: 10px 0px;
+        .class_selfstudy_container_classroom_main_item_id {
+          width: 200px;
+          color: $black;
+        }
+        .class_selfstudy_container_classroom_main_item_name {
+          width: 200px;
+          color: $black;
+          font-weight: 600;
+        }
+      }
+    }
+    .selfstudy_container_classroom_main_footer {
+      font-size: 16px;
+      color: gray;
+
+      margin-top: 30px;
+    }
+  }
+}
+
+.modal_main_box {
+  .self_modal_container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .self_modal_container_header {
+      font-size: 25px;
+      font-weight: bold;
+      font-family: $family;
+      text-align: center;
+    }
+    .self_modal_container_header2 {
+      display: flex;
+      gap: 20px;
+      width: 80%;
+      margin: auto;
+
+      .self_modal_container_header2_line {
+        width: 3px;
+        background-color: $blue;
+      }
+      .self_modal_container_header2_title {
+        color: $black;
+      }
+    }
+    .self_modal_container_body {
+      display: flex;
+      gap: 10px;
+      .self_modal_container_body_input_container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 10px;
+        .self_modal_container_body_input_container_user {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .self_modal_container_body_input_container_user_left {
+          }
+          .self_modal_container_body_input_container_user_right {
+            background-color: $blue;
+            color: $lightGray;
+            padding: 7px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+        }
+        .self_modal_container_body_input_container_el {
+          width: 100%;
+          height: 30px;
+          background-color: $lightBlue;
+          border-radius: 5px;
+          padding: 27px 10px;
+        }
+      }
+    }
+    .self_modal_container_footer {
+      .self_modal_container_footer_btns {
+        .self_modal_container_footer_close {
+          width: 80%;
+          padding: 20px;
+          text-align: center;
+          color: $lightGray;
+          background-color: $blue;
+          margin: auto;
+          border-radius: 40px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

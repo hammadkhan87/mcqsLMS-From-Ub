@@ -1,0 +1,29 @@
+@import "../../../../Styles/app.scss";
+.explore_container_chapters {
+  display: flex;
+  margin: auto;
+  .explore_container_chapters_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0px 20px;
+    justify-content: center;
+    gap: 20px;
+    @include tablet {
+      flex-direction: column;
+    }
+    .explore_container_chapters_item_el {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .explore_container_chapters_item_title {
+      font-family: $family;
+      text-transform: capitalize;
+      color: GRAY;
+      font-size: 13px;
+    }
+  }
+}

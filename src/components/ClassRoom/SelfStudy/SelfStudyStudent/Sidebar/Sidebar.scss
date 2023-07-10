@@ -1,0 +1,64 @@
+@import "../../../../../Styles/app.scss";
+.selfstudy_class {
+  padding: 20px 10px;
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.selfstudy_container_sidebar {
+  width: 140px;
+  // position: fixed;
+  background-color: $lightBlue !important;
+  padding: 20px 10px;
+  border-radius: 20px;
+  margin-top: 50px;
+  margin-left: 20px;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  @include tablet {
+    width: 50px;
+    margin-left: 0px;
+  }
+  .class1_title {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: none !important;
+  }
+  > div {
+    width: 100px;
+    height: 30px;
+    background-color: $lightBlue !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $blue !important;
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 20px 5px;
+    border-radius: 30px !important;
+    margin-bottom: 12px;
+    @include tablet {
+      width: 40px !important;
+    }
+  }
+  .active {
+    background-color: darken($color: $blue, $amount: 10) !important;
+    color: $lightBlue !important;
+    border-radius: 6px;
+  }
+}
+
+a:hover {
+  text-decoration: none;
+}
+.selfstudy_container_sidebar_span {
+  @include tablet {
+    display: none;
+  }
+}

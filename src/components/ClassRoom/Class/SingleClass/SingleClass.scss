@@ -1,0 +1,130 @@
+@import "../../../../Styles/app.scss";
+
+.main-singleclass-container {
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  background-color: #f0f3f3;
+  @include xtablet {
+    flex-direction: column;
+    padding: 5px;
+    height: auto;
+  }
+  .classroom_sidebar_title_menu{
+    display: none; // Hide the div by default
+
+    @media (max-width: 640px) {
+      display: block; // Show the div when the width is 640px or less
+    }}
+
+  .sider-bar-main {
+    background-color: white;
+    border-radius: 7px;
+    width: 20%;
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    align-items: center;
+    @include xtablet {
+      justify-content: center;
+      margin: 10px;
+      width: 94%;
+      height: auto;
+    }
+
+    .icon_text {
+      text-align: center;
+      display: flex;
+      @include laptop{
+        flex-direction:column;
+      }
+      @include xtablet{
+        flex-direction: row;
+      }
+      .icon-a {
+        font-size: 50px;
+        color: $blue;
+      }
+      p {
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        text-align: center;
+        font-weight: bold;
+        @include xtablet {
+          height: auto;
+        }
+      }
+    }
+    .under-class-div {
+      margin-top: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @include xtablet {
+        margin-top: 5px;
+        flex-direction: row;
+      }
+      p {
+        border-radius: 7px;
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        font-weight: bold;
+        color: $black;
+      }
+      p:hover {
+        cursor: pointer;
+        background-color: $blue-A;
+      }
+    }
+  }
+  .right-side-single-class {
+    background-color: white;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 85%;
+    height: 100vh;
+    @include xtablet {
+      margin-top: 10px;
+      width: 100%;
+      height: auto;
+    }
+    .right-top-bar {
+      background-color: $lightGray;
+      width: 97%;
+      height: 100px;
+      margin: 10px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+      @include tablet {
+        width: 90%;
+      }
+      .grade-text {
+        font-weight: bold;
+        color: $blue;
+        margin-left: 15px;
+      }
+      .teacher-text {
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px;
+        margin-right: 20px;
+      }
+    }
+    .main-component-div{
+      @include xtablet {
+        height: auto;
+      }
+    }
+  }   
+}

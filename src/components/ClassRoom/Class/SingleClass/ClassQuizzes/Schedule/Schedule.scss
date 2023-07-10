@@ -1,0 +1,59 @@
+@import "../../../../../../Styles/app.scss";
+
+.Schedule-main-div {
+  display: flex;
+  flex-direction: column;
+  background-color: $lightGray;
+  padding: 10px;
+ 
+  width: 100%;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 7px;
+  height: 50vh;
+  @include tablet{
+    padding: 0px;
+    margin: 5px;
+  }
+
+  .add-btn-ab {
+    width: 70px;
+    font-size: 18px;
+    float: right !important;
+    color: $blue;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .datepicker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input[type="datetime-local"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  .fetch-sheduled-quizes{
+    overflow-y: auto;
+    overflow:scroll;
+    overflow-x:hidden;
+    padding: 10px;
+    @include tablet{
+      padding: 2px;
+    }
+  }
+  .fetch-sheduled-quizes::-webkit-scrollbar{
+    display: none;
+  
+  }
+}

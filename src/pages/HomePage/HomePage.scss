@@ -1,0 +1,16 @@
+@import "../../Styles/app.scss";
+
+.homepage_container {
+  width: 100%;
+  padding: 20px 60px;
+  background-color: $lightGray;
+  max-width: 1450px;
+  margin-left: auto;
+  margin-right: auto;
+  @include xtablet {
+    padding: 20px 40px;
+  }
+  @include tablet {
+    padding: 20px 20px;
+  }
+}

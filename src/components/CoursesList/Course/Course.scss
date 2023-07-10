@@ -1,0 +1,77 @@
+@import "../../../Styles/app.scss";
+.course_container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 13px;
+  // padding: 10px;
+  .courses_container_img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+  }
+  .course_container_skill {
+    background-color: lighten($color: $lightBlue, $amount: 1);
+    color: $blue;
+    margin-bottom: 10px;
+    font-size: 11px;
+    padding: 7px 12px;
+    border-radius: 14px;
+    font-weight: 700;
+    width: fit-content;
+    text-transform: uppercase;
+    font-family: $family;
+    margin-left: 16px;
+    margin-top: 10px;
+  }
+  .course_container_title {
+    color: $black;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: $family;
+    margin-left: 16px;
+    margin-top: 10px;
+    margin-bottom: 13px;
+  }
+  .course_container_footer {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0px;
+    font-size: 14px;
+    margin-left: 16px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: $family;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: $family;
+      width: 70px;
+
+      .course_container_footer_icon {
+        padding: 4px;
+
+        border-radius: 50%;
+        background-color: $lightBlue;
+        font-family: $family;
+      }
+    }
+  }
+}
+
+.course_container_footer_icon:nth-child(1) {
+  color: red;
+  font-size: 23px;
+}
+.course_container_footer_icon:nth-child(2) {
+  color: blue;
+  font-size: 23px;
+}

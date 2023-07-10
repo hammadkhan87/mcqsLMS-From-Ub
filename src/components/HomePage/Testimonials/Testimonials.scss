@@ -1,0 +1,13 @@
+@import "../../../Styles/app.scss";
+.testimonials_container {
+  margin-top: 150px;
+
+  margin-bottom: 150px;
+  .testimonials_title {
+    font-size: 30px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: $family;
+    font-weight: 600;
+  }
+}
