@@ -11,6 +11,23 @@
   @include xtablet {
     width: 100%;
   }
+  .loading-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 4px;
+    z-index: 9999;
+  }
+  
+  .blur-page {
+    filter: blur(4px);
+    pointer-events: none;
+  }
   .teacher-create-quiz-top-bar {
     display: flex;
     margin: 10px 30px;

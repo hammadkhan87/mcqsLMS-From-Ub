@@ -14,8 +14,12 @@ const All = () => {
       query(collection(db, collectionName), where("refId", "==", id))
     );
     const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
+      // ...doc.data(),
       id: doc.id,
+      lessonName: doc.data().lessonName,
+        lessonImage: doc.data().lessonImage,
+        grade: doc.data().grade,
+        subject: doc.data().subject,
     }));
     setQuiziz(newData);
   };
@@ -23,54 +27,8 @@ const All = () => {
   useEffect(() => {
     fetchedQuiziz("lessonQuiz");
   }, []);
-  const handleLikeQuiz = async (
-    quizId,
-    chapterId,
-    subject,
-    lessonName,
-    grade,
-    lessonImage
-  ) => {
-    try {
-      const likesCollectionRef = collection(db, "likes");
-      await addDoc(likesCollectionRef, {
-        quizId,
-        userId: id,
-        chapterId,
-        subject,
-        lessonName,
-        grade,
-        lessonImage,
-      });
-      console.log("Quiz added to likes collection");
-    } catch (error) {
-      console.error("Error adding quiz to likes collection:", error);
-    }
-  };
-  const handleImportantQuiz = async (
-    quizId,
-    chapterId,
-    subject,
-    lessonName,
-    grade,
-    lessonImage
-  ) => {
-    try {
-      const likesCollectionRef = collection(db, "important");
-      await addDoc(likesCollectionRef, {
-        quizId,
-        userId: id,
-        chapterId,
-        subject,
-        lessonName,
-        grade,
-        lessonImage,
-      });
-      console.log("Quiz added to likes collection");
-    } catch (error) {
-      console.error("Error adding quiz to likes collection:", error);
-    }
-  };
+
+ 
   return (
     <div className="mylibrary_created">
       {quiziz.map((item, index) => {

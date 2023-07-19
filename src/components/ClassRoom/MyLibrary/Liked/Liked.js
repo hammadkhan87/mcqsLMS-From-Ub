@@ -7,7 +7,7 @@ const Liked = () => {
   const [quiziz, setQuiziz] = useState([]);
   const localData = localStorage.getItem("userData");
   const id = localData ? JSON.parse(localData).userId : null;
-  const fetchedQuiziz = async (collectionName) => {
+  const fetchedQuiziz = async () => {
     const lessonQuizRef = collection(db, "lessonQuiz");
     const q = query(
       lessonQuizRef,
@@ -15,13 +15,21 @@ const Liked = () => {
       where("refId", "==", id)
     );
     const snapshot = await getDocs(q);
-    const data = snapshot?.docs?.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const data = snapshot?.docs?.map((doc) => (
+      {
+        lessonName: doc.data().lessonName,
+        lessonImage: doc.data().lessonImage,
+        grade: doc.data().grade,
+        subject: doc.data().subject,
+        id: doc.id,
+        //  ...doc.data() 
+      }));
     setQuiziz(data);
   };
 
   useEffect(() => {
-    fetchedQuiziz("likes");
-    console.log(quiziz, "liked");
+    fetchedQuiziz();
+    // console.log(quiziz, "liked");
   }, []);
   return (
     <div className="mylibrary_created">

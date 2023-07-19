@@ -14,10 +14,18 @@ const SelfGround = () => {
   const [singleLesson, setSingleLesson] = useState({});
   const fetchedDataLessons = async (collectionName) => {
     const docRef = doc(db, collectionName, id);
+    // const docSnapshot = await getDoc(docRef);
+    // if (docSnapshot.exists()) {
+    //   const data = docSnapshot.data();
+    //   setSingleLesson({ ...data, id: docSnapshot.id });
     const docSnapshot = await getDoc(docRef);
-    if (docSnapshot.exists()) {
-      const data = docSnapshot.data();
-      setSingleLesson({ ...data, id: docSnapshot.id });
+  if (docSnapshot.exists()) {
+    const lessonName = docSnapshot.data().lessonName;
+    const questionsSize = docSnapshot.data().questions.length;
+    const lessonId = docSnapshot.id;
+    const lessonData = { lessonName, questionsSize, id: lessonId };
+    setSingleLesson(lessonData);
+
     } else {
       console.log("Document not found!");
     }
@@ -36,7 +44,7 @@ const SelfGround = () => {
     <div className="self_ground_container">
       <div className="self_ground_container_block">
         <div className="self_ground_total">
-          {singleLesson?.questions?.length} Questions
+          {singleLesson?.questionsSize} Questions
         </div>
         <div className="self_ground_title">
           Lesson Name : {singleLesson?.lessonName}

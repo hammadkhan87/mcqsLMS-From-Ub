@@ -38,31 +38,42 @@ const SingleClass = ({showDrawer}) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("classid");
-  console.log("re_id", ref_id, "classid", searchQuery);
+  // console.log("re_id", ref_id, "classid", searchQuery);
   const [classroom, setClassroom] = useState("");
   const [selectedComponent, setSelectedComponent] = useState("dashboard");
 
   const fetchClassroom = async () => {
     try {
-      const classRef = collection(db, "classes");
-      const classDocRef = doc(classRef, searchQuery);
-      const classSnapshot = await getDoc(classDocRef);
+      // const classRef = collection(db, "classes");
+      // const classDocRef = doc(classRef, searchQuery);
+      // const classSnapshot = await getDoc(classDocRef);
   
-      if (classSnapshot.exists()) {
-        const classData = classSnapshot.data();
-        console.log(classData);
-        setClassroom({
-          id: classSnapshot.id, // Add the document ID to the class data
-          ...classData
-        });
+      // if (classSnapshot.exists()) {
+      //   const classData = classSnapshot.data();
+      //   console.log(classData);
+      //   setClassroom({
+      //     id: classSnapshot.id, // Add the document ID to the class data
+      //     ...classData
+      //   });
+    
+      const collectionRef = collection(db, "classes"); // Replace "yourCollectionName" with the actual collection name
+      const documentRef = doc(collectionRef, searchQuery); // Replace searchQuery with the specific document ID you want to fetch
+      const snapshot = await getDoc(documentRef);
+      
+      if (snapshot.exists()) {
+        const classData = {
+          id: snapshot.id,
+          className: snapshot.data().className
+        };
+        
+        setClassroom(classData);
       } else {
         console.log("Class not found");
       }
     } catch (error) {
       console.log("Error fetching class data:", error);
     }
-  };
-
+  }
 
   const handleSidebarClick = (component) => {
     setSelectedComponent(component);

@@ -7,6 +7,7 @@ const Saved = () => {
   const [quiziz, setQuiziz] = useState([]);
   const localData = localStorage.getItem("userData");
   const id = localData ? JSON.parse(localData).userId : null;
+  console.log(id)
   const fetchedQuiziz = async (collectionName) => {
     const lessonQuizRef = collection(db, "lessonQuiz");
     const q = query(
@@ -15,8 +16,17 @@ const Saved = () => {
       where("refId", "==", id)
     );
     const snapshot = await getDocs(q);
-    const data = snapshot?.docs?.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const data = snapshot?.docs?.map((doc) => (
+      { id: doc.id,
+        lessonName: doc.data().lessonName,
+        lessonImage: doc.data().lessonImage,
+        grade: doc.data().grade,
+        subject: doc.data().subject,
+
+        
+        }));
     setQuiziz(data);
+    console.log(data)
   };
 
   useEffect(() => {

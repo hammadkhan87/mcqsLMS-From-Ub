@@ -28,11 +28,15 @@ const Folder = ({ item }) => {
       query(
         collection(db, collectionName),
         where("refId", "==", id),
-        where("foldersName", "==", paramName)
+        where("Folder", "==", paramName)
       )
     );
     const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
+      // ...doc.data(),
+      lessonName: doc.data().lessonName,
+      lessonImage: doc.data().lessonImage,
+      grade: doc.data().grade,
+      subject: doc.data().subject,
       id: doc.id,
     }));
     setQuiziz(newData);
@@ -52,7 +56,7 @@ const Folder = ({ item }) => {
   };
 
   useEffect(() => {
-    fetchedQuiziz("teacherFolderQuiz");
+    fetchedQuiziz("lessonQuiz");
     console.log("quizFolder", quiziz);
   }, [paramName]);
   return (

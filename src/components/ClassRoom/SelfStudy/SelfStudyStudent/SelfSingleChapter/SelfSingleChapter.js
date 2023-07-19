@@ -6,7 +6,7 @@ import { useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../../../firebase";
 
-const SelfSingleChapter = ({ lessons, element, result,   userId}) => {
+const SelfSingleChapter = ({ lessons, element, result,grade, userId}) => {
   console.log(userId,"userId");
   // const localData = localStorage.getItem("userData");
   // const userId = localData ? JSON.parse(localData).userId : null;
@@ -27,7 +27,7 @@ const SelfSingleChapter = ({ lessons, element, result,   userId}) => {
 
   const id = element.id;
   const filteredLessons = lessons.filter((lesson) => {
-    return lesson.chapterId == id;
+    return lesson.chapterId == id && lesson.grade == grade ;
   });
   const filteredResult = result.filter((item) => {
     return item.userId == userId;
@@ -43,7 +43,9 @@ const SelfSingleChapter = ({ lessons, element, result,   userId}) => {
       const lessonsSnapshot = await getDocs(
         query(
           collection(db, "lessonQuiz"),
-          where("chapterId", "==", element.id)
+          where("chapterId", "==", element.id),
+          where("grade", "array-contains", grade)
+
         )
       );
 
@@ -110,7 +112,7 @@ const SelfSingleChapter = ({ lessons, element, result,   userId}) => {
                   </p>
                 )}
               </div>
-
+                    {console.log(selectedLesson)}
               <Modal
                 title=""
                 className="self_modal"
@@ -123,11 +125,11 @@ const SelfSingleChapter = ({ lessons, element, result,   userId}) => {
                 </div>
                 <div className="self_modal_body">
                   <div className="self_modal_body_length">
-                    Total Question {selectedLesson?.questions?.length}
+                    {selectedLesson?.lessonName}
                   </div>
                   <div className="self_modal_body_difficulty"></div>
                   <Link
-                    to={`/selfstudy/ground/${selectedLesson?.id}?id=${selectedLesson?.id}`}
+                    to={`/selfstudy/ground/${selectedLesson?.id}/${selectedLesson?.lessonName}?id=${selectedLesson?.id}`}
                   >
                     <div className="self_modal_body_play">Play</div>
                   </Link>{" "}

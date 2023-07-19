@@ -8,10 +8,19 @@
 
 .selfstudy_container {
   display: flex;
+  margin-bottom: 150px;
+  position: relative;
   .selfstudy_container_tab {
-    position: relative;
-    left: 150px;
+    position: relative !important;
+
+    left: 150px !important ;
     height: 500px;
+    width: auto;
+    @include tablet {
+      left: 0px !important;
+      
+
+    }
     .tabpanel_container {
       .tabpanel_container_title {
         font-size: 33px;
@@ -20,8 +29,12 @@
         color: $blue;
         text-transform: capitalize;
         margin-bottom: 40px;
+        margin-top: 40px;
       }
       .tabpanel_container_chapters {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 80px;
         @include xtablet {
           grid-template-columns: 1fr 1fr;
         }
@@ -31,4 +44,41 @@
       }
     }
   }
+}
+
+.active-tab {
+  // all: unset !important;
+  background-color: $lightGray !important;
+  border-radius: 20px !important;
+  color: $blue !important;
+  font-weight: bold;
+  border-bottom: 0px !important;
+  padding: 0px 30px !important;
+}
+.css-gzfp0b {
+  // border-bottom: 0px solid !important;
+  // border-color: rgba(0, 0, 0, 0.12) !important;
+  margin: auto;
+  @include tablet{
+    position: relative;
+    left: -50px;
+  }
+  
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+  @include tablet {
+    font-size: 12px !important;
+    padding: 0px !important;
+    width: 80px !important;
+
+  }
+}
+.css-gzfp0b * {
+}
+.MuiTabs-flexContainer {
+  border: 0px !important;
+}
+.MuiTab-textColorPrimary {
+  padding: 0px 30px !important;
+  border-bottom: 0px !important;
 }

@@ -99,7 +99,9 @@ const CodeRoom = ({ showDrawer }) => {
 
       const lessonsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        lessonName:doc.data().lessonName,
+        lessonImage:doc.data().lessonImage,
+        createdAt:doc.data().createdAt,
       }));
 
       // Sort the lessons based on the coderoom createdAt field in descending order

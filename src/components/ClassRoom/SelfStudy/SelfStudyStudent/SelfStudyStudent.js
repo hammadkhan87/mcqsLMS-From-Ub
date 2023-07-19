@@ -17,50 +17,108 @@ import { BiArrowBack } from "react-icons/bi";
 
 const SelfStudyStudent = () => {
   const { id } = useParams();
-  console.log(id, "idddddd");
+  // console.log(id, "idddddd");
   const [chapters, setChapters] = useState([]);
+  // const localData = localStorage.getItem("userData");
+  // const userId = localData ? JSON.parse(localData).userId : null;
   const [lessons, setLessons] = useState([]);
   const [result, setResult] = useState([]);
   const [filterArray, setFilterArray] = useState([]);
   const [grade, setGrade] = useState("K");
   const [value, setValue] = useState("1");
-  let chapterName;
+  let bookName;
 
   if (value == 1) {
-    chapterName = "math";
+    bookName = "math";
   }
   if (value == 2) {
-    chapterName = "language art";
+    bookName = "language art";
   }
   if (value == 3) {
-    chapterName = "science";
+    bookName = "science";
   }
   if (value == 4) {
-    chapterName = "socialstudy";
+    bookName = "socialstudy";
   }
   const getGrade = (event) => {
     setGrade(event.target.getAttribute("value"));
   };
+  // const fetchedDataChapters = async (collectionName) => {
+  //   const querySnapshot = await getDocs(collection(db, collectionName));
+  //   const newData = querySnapshot.docs.map((doc) => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  //   }));
+  //   setChapters(newData);
+  // };
   const fetchedDataChapters = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setChapters(newData);
-  };
-  const fetchedDataLessons = async (collectionName) => {
     const querySnapshot = await getDocs(
-      query(collection(db, collectionName), where("quizType", "==", "self"))
+      query(
+        collection(db, collectionName),
+        where("subject", "==", bookName),
+        where("grade", "array-contains", grade)
+        )
     );
+
     const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
+      title: doc.data().title, // Retrieve only the 'title' field
       id: doc.id,
     }));
-    setLessons(newData);
+    setFilterArray(newData)
+    setChapters(newData);
+    fetchedDataLessons("lessonQuiz",newData);
+
   };
+  // const fetchedDataLessons = async (collectionName) => {
+  //   const querySnapshot = await getDocs(
+  //     query(collection(db, collectionName), where("quizType", "==", "self"))
+  //   );
+  //   const newData = querySnapshot.docs.map((doc) => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  //   }));
+  //   setLessons(newData);
+  // };
+  const fetchedDataLessons = async (collectionName,data) => {
+    // const querySnapshot = await getDocs(
+    //   query(collection(db, collectionName), where("quizType", "==", "self"))
+    // );
+    // const newData = querySnapshot.docs.map((doc) => ({
+    //   ...doc.data(),
+    //   id: doc.id,
+    // }));
+    const filterIds = data?.map((item) => item.id);
+    if (filterIds && filterIds.length > 0) {
+
+    const querySnapshot = await getDocs(
+      query(collection(db, collectionName), where("chapterId", "in", filterIds))
+    );
+    console.log(querySnapshot.docs)
+    const newData = querySnapshot.docs.map((doc) => ({
+      // ...doc.data(),
+      lessonName: doc.data().lessonName,
+      chapterId: doc.data().chapterId,
+      grade: doc.data().grade,
+      // lessonImage: doc.data().lessonImage,
+      id: doc.id,
+    }));
+    setLessons(newData);}
+  };
+  // const fetchedDataResult = async (collectionName) => {
+  //   const querySnapshot = await getDocs(collection(db, collectionName));
+  //   const newData = querySnapshot.docs.map((doc) => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  //   }));
+  //   setResult(newData);
+  // };
   const fetchedDataResult = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, collectionName),  
+        // where("userId", "==", id),
+        )
+    );
     const newData = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
@@ -69,17 +127,16 @@ const SelfStudyStudent = () => {
   };
   useEffect(() => {
     fetchedDataChapters("chapters");
-    fetchedDataLessons("lessonQuiz");
     fetchedDataResult("result");
-  }, []);
+  }, [bookName,grade]);
 
-  useEffect(() => {
-    const filteredData = chapters.filter((chap) => {
-      return chap.subject == chapterName && chap.grade.includes(grade);
-    });
+  // useEffect(() => {
+  //   const filteredData = chapters.filter((chap) => {
+  //     return chap.subject == chapterName && chap.grade.includes(grade);
+  //   });
 
-    setFilterArray(filteredData);
-  }, [chapters, chapterName, grade, result]);
+  //   setFilterArray(filteredData);
+  // }, [chapters, chapterName, grade, result]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -110,7 +167,7 @@ const SelfStudyStudent = () => {
                 >
                   <BiArrowBack />
                 </div>
-                {grade} grade {chapterName} class
+                {grade} grade {bookName} class
               </div>
               <div className="tabpanel_container_chapters">
                 {filterArray.map((element) => {
@@ -119,6 +176,8 @@ const SelfStudyStudent = () => {
                       lessons={lessons}
                       element={element}
                       key={id}
+                      grade={grade}
+
                       result={result}
                       setResult={setResult}
                       userId={id}
@@ -131,7 +190,7 @@ const SelfStudyStudent = () => {
           <TabPanel value="2">
             <div className="tabpanel_container">
               <div className="tabpanel_container_title">
-                {grade} grade {chapterName}
+                {grade} grade {bookName}
               </div>
               <div className="tabpanel_container_chapters">
                 {filterArray.map((element) => {
@@ -140,6 +199,8 @@ const SelfStudyStudent = () => {
                       lessons={lessons}
                       element={element}
                       key={id}
+                      grade={grade}
+
                       result={result}
                       setResult={setResult}
                       userId={id}
@@ -152,7 +213,7 @@ const SelfStudyStudent = () => {
           <TabPanel value="3">
             <div className="tabpanel_container">
               <div className="tabpanel_container_title">
-                {grade} grade {chapterName}
+                {grade} grade {bookName}
               </div>
               <div className="tabpanel_container_chapters">
                 {filterArray.map((element) => {
@@ -161,6 +222,8 @@ const SelfStudyStudent = () => {
                       lessons={lessons}
                       element={element}
                       key={id}
+                      grade={grade}
+
                       result={result}
                       setResult={setResult}
                       userId={id}
@@ -173,7 +236,7 @@ const SelfStudyStudent = () => {
           <TabPanel value="4">
             <div className="tabpanel_container">
               <div className="tabpanel_container_title">
-                {grade} grade {chapterName}
+                {grade} grade {bookName}
               </div>
               <div className="tabpanel_container_chapters">
                 {filterArray.map((element) => {
@@ -182,6 +245,7 @@ const SelfStudyStudent = () => {
                       lessons={lessons}
                       element={element}
                       key={id}
+                      grade={grade}
                       result={result}
                       setResult={setResult}
                       userId={id}

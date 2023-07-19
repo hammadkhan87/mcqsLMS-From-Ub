@@ -124,31 +124,31 @@ const Settings = ({showDrawer}) => {
       // Handle update document error scenario
     }
   };
+  const fetchUserData = async () => {
+    try {
+      const userDocRef = doc(db, "users", userId);
+      console.log("userDocRef", userDocRef);
 
+      const userDocSnapshot = await getDoc(userDocRef);
+      console.log("userDocSnapshot", userDocSnapshot);
+
+      if (userDocSnapshot.exists()) {
+        const userData = userDocSnapshot.data();
+        console.log("userData", userData);
+
+        setName(userData.name);
+        setEmail(userData.email);
+      } else {
+        console.log("User document does not exist");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      // Handle error scenario
+    }
+  };
   useEffect(() => {
     // Fetch the user data from Firestore and update the state
-    const fetchUserData = async () => {
-      try {
-        const userDocRef = doc(db, "users", userId);
-        console.log("userDocRef", userDocRef);
-
-        const userDocSnapshot = await getDoc(userDocRef);
-        console.log("userDocSnapshot", userDocSnapshot);
-
-        if (userDocSnapshot.exists()) {
-          const userData = userDocSnapshot.data();
-          console.log("userData", userData);
-
-          setName(userData.name);
-          setEmail(userData.email);
-        } else {
-          console.log("User document does not exist");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        // Handle error scenario
-      }
-    };
+   
 
     fetchUserData();
   }, []);

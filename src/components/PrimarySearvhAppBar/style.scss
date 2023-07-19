@@ -9,6 +9,16 @@
     // color: white;
   }
 }
+@include tablet{
+  .css-7kdnzg {
+    width: 240px !important;
+  }
+  .css-i6s8oy{
+    width: 240px !important;
+  
+  }
+}
+
 .right_side_signup {
   background-color: $blue;
   color: $lightBlue;

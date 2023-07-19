@@ -5,7 +5,7 @@ import { Button, Modal } from "antd";
 import { useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../firebase";
-const SelfSingleChapter = ({ lessons, element, result, isLogin }) => {
+const SelfSingleChapter = ({ lessons, element, result, isLogin,grade }) => {
   const localData = localStorage.getItem("userData");
   const userId = localData ? JSON.parse(localData).userId : null;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ const SelfSingleChapter = ({ lessons, element, result, isLogin }) => {
 
   const id = element.id;
   const filteredLessons = lessons.filter((lesson) => {
-    return lesson.chapterId == id;
+    return lesson.chapterId == id && lesson.grade == grade ;
   });
   const filteredResult = result.filter((item) => {
     return item.userId == userId;
@@ -41,7 +41,9 @@ const SelfSingleChapter = ({ lessons, element, result, isLogin }) => {
       const lessonsSnapshot = await getDocs(
         query(
           collection(db, "lessonQuiz"),
-          where("chapterId", "==", element.id)
+          where("chapterId", "==", element.id),
+          where("grade", "array-contains", grade)
+
         )
       );
 
@@ -137,7 +139,7 @@ const SelfSingleChapter = ({ lessons, element, result, isLogin }) => {
                   </div>
                   <div className="self_modal_body_difficulty"></div>
                   <Link
-                    to={`/selfstudy/ground/${selectedLesson?.id}?id=${selectedLesson?.id}`}
+                    to={`/selfstudy/ground/${selectedLesson?.id}/${selectedLesson?.lessonName}?id=${selectedLesson?.id}`}
                   >
                     <div className="self_modal_body_play">Play</div>
                   </Link>

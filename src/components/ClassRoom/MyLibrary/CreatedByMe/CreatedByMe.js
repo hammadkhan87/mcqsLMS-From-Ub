@@ -3,6 +3,7 @@ import "./CreatedByMe.scss";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { addDoc } from "firebase/firestore";
+import {toast} from "react-hot-toast";
 import { IoIosImages } from "react-icons/io";
 import { useEffect, useState } from "react";
 const CreatedByMe = () => {
@@ -61,16 +62,18 @@ const CreatedByMe = () => {
           createdAt,
           Folder: "Like",
         });
+        toast.success("Quiz added to likes collection")
         console.log("Quiz added to likes collection");
       } catch (error) {
         console.error("Error adding quiz to likes collection:", error);
+        toast.error("Error adding quiz to likes collection:")
       }
     } else {
       console.error("Invalid data: questions is not an array");
+      toast.error("invalid data")
     }
   };
   const handleImportantQuiz = async (
-    quizId,
     subject,
     lessonName,
     grade,
@@ -86,7 +89,6 @@ const CreatedByMe = () => {
     try {
       const likesCollectionRef = collection(db, "lessonQuiz");
       await addDoc(likesCollectionRef, {
-        quizId,
         userId: id,
         subject,
         lessonName,
@@ -101,9 +103,11 @@ const CreatedByMe = () => {
         createdAt,
         Folder: "Important",
       });
-      console.log("Quiz added to likes collection");
+      console.log("Quiz added to important collection");
+      toast.success("Quiz added to important collection")
     } catch (error) {
-      console.error("Error adding quiz to likes collection:", error);
+      console.error("Error adding quiz to important collection:", error);
+      toast.error("Error adding quiz to important collection:")
     }
   };
   return (

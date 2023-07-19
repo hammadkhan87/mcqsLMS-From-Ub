@@ -73,7 +73,7 @@ const TeacherClasssroomResult = () => {
 
     fetchResults();
   }, [classid, quizId]);
-  console.log(results)
+  // console.log(results)
   return(
     <div className="main_class_result_container">
     {results ? (<>

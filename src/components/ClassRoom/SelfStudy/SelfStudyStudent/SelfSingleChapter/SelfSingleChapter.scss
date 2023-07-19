@@ -3,22 +3,27 @@
 .selfsinglechapter_container {
   .selfsinglechapter_container_heading {
     font-size: 23px;
+    font-weight: 700;
     color: $black;
     text-transform: capitalize;
     font-family: $family;
     margin-bottom: 10px;
     margin-top: 10px;
   }
+  .selfsinglechapter_container_heading_num {
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 6px;
+  }
   .selfsinglechapter_container_heading_lessons {
     display: flex;
     flex-direction: column;
-    color: $blue;
+    color: Gray;
     font-size: 17px;
     font-family: $family;
-    margin-left: 8px;
+    margin-left: 0px !important;
     margin-top: 4px;
     list-style: circle;
-
 
     .selfsinglechapter_container_lesson {
       cursor: pointer;
@@ -26,10 +31,11 @@
       gap: 10px;
       align-items: center;
       margin: 4px 0px;
-      .selfsinglechapter_container_lesson_name{
-        text-transform: capitalize
+      .selfsinglechapter_container_lesson_name {
+        text-transform: capitalize;
+        color: gray;
       }
-      .selfsinglechapter_container_lesson_score{
+      .selfsinglechapter_container_lesson_score {
         color: $lightGray;
         background-color: $blue;
         font-size: 10px;
@@ -70,11 +76,26 @@
   }
 }
 
-.ant-modal-footer{
+.ant-modal-footer {
   display: none;
 }
 
-
-a:hover{
+a:hover {
   text-decoration: none;
+}
+
+.green {
+  background-color: rgba(0, 128, 0, 0.61) !important;
+  width: 40px;
+  text-align: center;
+}
+.red {
+  background-color: rgba(255, 0, 0, 0.521) !important ;
+  width: 40px;
+  text-align: center;
+}
+.orange {
+  background-color: rgb(224, 131, 9) !important;
+  width: 40px;
+  text-align: center;
 }

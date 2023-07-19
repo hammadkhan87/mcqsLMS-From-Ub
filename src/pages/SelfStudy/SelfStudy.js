@@ -8,10 +8,14 @@ import TabPanel from "@mui/lab/TabPanel";
 import fetchData from "../../functions/getData";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import handleFirebaseError from "../../handleFirebaseError";
 import { db } from "../../firebase";
 import SelfSingleChapter from "../../components/SelfStudy/SelfSingleChapter/SelfSingleChapter";
 import Sidebar from "../../components/SelfStudy/Sidebar/Sidebar";
+import { toast } from "react-hot-toast";
 const SelfStudy = ({ isLogin }) => {
+  const localData = localStorage.getItem("userData");
+  const userId = localData ? JSON.parse(localData).userId : null;
   const [chapters, setChapters] = useState([]);
   const [lessons, setLessons] = useState([]);
   const [result, setResult] = useState([]);
@@ -36,44 +40,86 @@ const SelfStudy = ({ isLogin }) => {
     setGrade(event.target.getAttribute("value"));
   };
   const fetchedDataChapters = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    try {
+      
+   
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, collectionName),
+        where("subject", "==", bookName),
+        where("grade", "array-contains", grade)
+        )
+    );
+
     const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
+      title: doc.data().title, // Retrieve only the 'title' field
       id: doc.id,
     }));
+    setFilterArray(newData)
     setChapters(newData);
-  };
-  const fetchedDataLessons = async (collectionName) => {
+    fetchedDataLessons("lessonQuiz",newData);
+
+  
+   } catch (error) {
+      handleFirebaseError(error)
+      toast.error("something wents wrong")
+    }
+  }
+  const fetchedDataLessons = async (collectionName,data) => {
+    // const querySnapshot = await getDocs(
+    //   query(collection(db, collectionName), where("quizType", "==", "self"))
+    // );
+    // const newData = querySnapshot.docs.map((doc) => ({
+    //   ...doc.data(),
+    //   id: doc.id,
+    // }));
+    const filterIds = data?.map((item) => item.id);
+    if (filterIds && filterIds.length > 0) {
     const querySnapshot = await getDocs(
-      query(collection(db, collectionName), where("quizType", "==", "self"))
+      query(collection(db, collectionName), where("chapterId", "in", filterIds))
+    );
+    console.log(querySnapshot.docs)
+    const newData = querySnapshot.docs.map((doc) => ({
+      // ...doc.data(),
+      lessonName: doc.data().lessonName,
+      chapterId: doc.data().chapterId,
+      grade: doc.data().grade,
+      // lessonImage: doc.data().lessonImage,
+      id: doc.id,
+    }));
+    setLessons(newData);}
+  };
+  const fetchedDataResult = async (collectionName) => {
+    try {
+      
+    
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, collectionName),
+        where("userId", "==", userId),
+        )
     );
     const newData = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
-    setLessons(newData);
-  };
-  const fetchedDataResult = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
     setResult(newData);
+   } catch (error) {
+      toast.error("some thing wents wrong")
+    }
   };
   useEffect(() => {
     fetchedDataChapters("chapters");
-    fetchedDataLessons("lessonQuiz");
     fetchedDataResult("result");
-  }, []);
+  }, [ bookName, grade]);
 
-  useEffect(() => {
-    const filteredData = chapters.filter((chap) => {
-      return chap.subject == bookName && chap.grade.includes(grade);
-    });
+  // useEffect(() => {
+  //   const filteredData = chapters.filter((chap) => {
+  //     return chap.subject == bookName && chap.grade.includes(grade);
+  //   });
 
-    setFilterArray(filteredData);
-  }, [chapters, bookName, grade, result]);
+  //   setFilterArray(filteredData);
+  // }, [chapters, bookName, grade, result]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -127,6 +173,7 @@ const SelfStudy = ({ isLogin }) => {
                     <SelfSingleChapter
                       lessons={lessons}
                       element={element}
+                      grade={grade}
                       key={id}
                       result={result}
                       setResult={setResult}
@@ -148,6 +195,7 @@ const SelfStudy = ({ isLogin }) => {
                     <SelfSingleChapter
                       lessons={lessons}
                       element={element}
+                      grade={grade}
                       key={id}
                       result={result}
                       setResult={setResult}
@@ -168,6 +216,7 @@ const SelfStudy = ({ isLogin }) => {
                     <SelfSingleChapter
                       lessons={lessons}
                       element={element}
+                      grade={grade}
                       key={id}
                       result={result}
                       setResult={setResult}
@@ -188,7 +237,8 @@ const SelfStudy = ({ isLogin }) => {
                     <SelfSingleChapter
                       lessons={lessons}
                       element={element}
-                      key={id}
+                      grade={grade}
+                        key={id}
                       result={result}
                       setResult={setResult}
                     />

@@ -43,12 +43,13 @@ const CodeRoomStudents = () => {
             ...doc.data(),
           }));
           setStudents(newData);
-          console.log(students, "students");
+          // console.log(students, "students");
           // promiseToast.success("Code room fetched successfully");
         }
       );
     } catch (error) {
       console.error("Error fetching code room: ", error);
+      toast.error("Error fetching code room")
       // promiseToast.error("Error fetching code room: " + error);
     }
   };
@@ -68,8 +69,8 @@ const CodeRoomStudents = () => {
             ...doc.data(),
           }));
           setStudentsResult(newData);
-          console.log(studentsResult, "students Result");
-          console.log(newData, "students Result");
+          // console.log(studentsResult, "students Result");
+          // console.log(newData, "students Result");
           // promiseToast.success("Code room fetched successfully");
         }
       );
@@ -102,23 +103,24 @@ const CodeRoomStudents = () => {
         console.log(error.message);
       });
   }
-  useEffect(() => {
-    const fetchLesson = async () => {
-      try {
-        const docRef = doc(db, "lessonQuiz", lessonId);
-        const docSnap = await getDoc(docRef);
+  const fetchLesson = async () => {
+    try {
+      const docRef = doc(db, "lessonQuiz", lessonId);
+      const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          // Document exists, retrieve the data
-          setLesson(docSnap.data());
-        } else {
-          // Document does not exist
-          console.log("Document not found.");
-        }
-      } catch (error) {
-        console.error("Error fetching document:", error);
+      if (docSnap.exists()) {
+        // Document exists, retrieve the data
+        setLesson(docSnap.data());
+      } else {
+        // Document does not exist
+        console.log("Document not found.");
       }
-    };
+    } catch (error) {
+      console.error("Error fetching document:", error);
+    }
+  };
+  useEffect(() => {
+   
     fetchLesson();
     fetchCodeStudents();
     fetchStudentResult();

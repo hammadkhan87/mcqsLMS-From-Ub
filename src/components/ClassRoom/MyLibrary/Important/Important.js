@@ -9,18 +9,21 @@ const Important = () => {
   const id = localData ? JSON.parse(localData).userId : null;
   const fetchedQuiziz = async (collectionName) => {
     const querySnapshot = await getDocs(
-      query(collection(db, collectionName), where("userId", "==", id))
+      query(collection(db, collectionName), where("userId", "==", id),where("Folder","==","Important"))
     );
     const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
+      // ...doc.data(),
+      lessonName: doc.data().lessonName,
+      lessonImage: doc.data().lessonImage,
+      grade: doc.data().grade,
+      subject: doc.data().subject,
       id: doc.id,
     }));
     setQuiziz(newData);
   };
 
   useEffect(() => {
-    fetchedQuiziz("important");
-    console.log(quiziz, "liked");
+    fetchedQuiziz("lessonQuiz");
   }, []);
   return (
     <div className="mylibrary_created">

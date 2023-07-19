@@ -60,7 +60,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 370,
   height: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -137,6 +137,7 @@ export default function PrimarySearchAppBar({
       await auth.signOut();
 
       window.location.reload(true);
+      navigate("/");
       // Redirect or update UI to reflect successful logout
     } catch (error) {
       console.log("Error during logout:", error);
@@ -286,7 +287,7 @@ export default function PrimarySearchAppBar({
         }}
       >
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -295,7 +296,7 @@ export default function PrimarySearchAppBar({
             onClick={showDrawer}
           >
             <MenuIcon sx={{ color: "black" }} />
-          </IconButton>
+          </IconButton> */}
           <Box
             sx={{
               color: "black",
@@ -314,9 +315,7 @@ export default function PrimarySearchAppBar({
                   <div className="header_sidebar_title_heading">Mirown</div>
                   <div className="header_sidebar_title_sub">
                     <div className="header_sidebar_title_sub_line"></div>
-                    <div className="header_sidebar_title_sub_text">
-                      QUIZZES
-                    </div>
+                    <div className="header_sidebar_title_sub_text">QUIZZES</div>
                   </div>
                 </div>
               </Typography>
@@ -520,7 +519,7 @@ export default function PrimarySearchAppBar({
                   You Need to Register as teacher to access this page
                 </label>
                 <Link
-                  to="/register"
+                  to="/signup"
                   className="header_btn"
                   // onClick={handleForgotPassword}
                 >

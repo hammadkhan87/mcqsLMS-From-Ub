@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Lost.scss"
 const Lost = () => {
+  const localData = localStorage.getItem("userData")
+  const role = localData?JSON.parse(localData).role: null;
+  const navigate=useNavigate()
+//  if(role==="Teacher"){
+//   navigate("/classroom/library")
+//  }
   return (
     <div className="lost_container">
       <div class="section">

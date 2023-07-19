@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Questions.scss";
 import Question from "../Question/Question";
 import { db } from "../../../firebase";
@@ -25,21 +25,58 @@ const Questions = ({ singleLesson, teacherClassId, teacherClassQuizEnd }) => {
   const [timer, setTimer] = useState(null);
   const [quizEnd, setQuizEnd] = useState(false);
   const questions = singleLesson.questions;
-  const currentQuestion = questions[currentQuestionIndex];
-  const timeLimit = currentQuestion?.timeLimit || 30;
-  const navigate = useNavigate();
+  const totalDuration = singleLesson.totalDuration;
+  // console.log(totalDuration);
+  // console.log(questions.length);
 
+  const questionduration = totalDuration % questions.length;
+  // console.log(questionduration);
+  const currentQuestion = questions[currentQuestionIndex];
+  const timeLimit = questionduration * 60;
+  const [timelimit, setTimeLimit] = useState(timeLimit);
+  const [remainingTime, setRemainingTime] = useState(timelimit);
+
+  // const memoizedRemainingTime = useMemo(() => remainingTime, [remainingTime]);
+
+  const navigate = useNavigate(); // console.log(timelimit);
+  // console.log(timelimit)
   useEffect(() => {
-    const newTimer = setTimeout(() => {
-      handleNextQuestion();
-    }, timeLimit * 1000);
-    setTimer(newTimer);
-    console.log(newTimer, "newTimer : useeffect");
-    console.log(timeLimit, " time limit : useeffect");
-    return () => {
-      clearTimeout(newTimer);
-    };
-  }, [currentQuestionIndex, timeLimit]);
+    if (timelimit > 0) {
+      const newTimer = setTimeout(() => {
+        handleNextQuestion();
+        setRemainingTime(timelimit);
+      }, timelimit * 1000);
+      setTimer(newTimer);
+      // console.log(newTimer, "newTimer : useeffect");
+      // console.log(timelimit, " time limit : useeffect");
+      return () => {
+        clearTimeout(newTimer);
+      };
+    }
+  }, [currentQuestionIndex]);
+  // useEffect(() => {
+  //   if (timelimit > 0) {
+  //     const newTimer = setTimeout(() => {
+  //       handleNextQuestion();
+  //     }, timelimit * 1000);
+  //     setTimer(newTimer);
+
+  //     return () => {
+  //       clearTimeout(newTimer);
+  //     };
+  //   }
+  // }, [currentQuestionIndex]);
+  // useEffect(() => {
+  //   if (remainingTime > 0) {
+  //     const timer = setTimeout(() => {
+  //       handleNextQuestion();
+  //     }, remainingTime * 1000);
+
+  //     return () => {
+  //       clearTimeout(timer);
+  //     };
+  //   }
+  // }, [remainingTime]);
 
   const handleNextQuestion = async (answer) => {
     const correctArray = currentQuestion?.options
@@ -62,16 +99,57 @@ const Questions = ({ singleLesson, teacherClassId, teacherClassQuizEnd }) => {
       setQuizEnd(true);
       setScoreStored(true);
     } else {
+      setRemainingTime(questionduration * 60);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     }
   };
 
   const onSelectAnswer = (answer) => {
+    setTimeLimit(questionduration * 60);
+    setRemainingTime(questionduration * 60);
     handleNextQuestion(answer);
   };
 
   const localData = localStorage.getItem("userData");
   const userId = localData ? JSON.parse(localData).userId : null;
+
+  const startTimer = () => {
+    const timer = setInterval(() => {
+      setRemainingTime((remainingTime) => remainingTime - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  };
+
+  // Call the startTimer function when currentQuestionIndex or handleNextQuestion change
+  useState(() => {
+    if (timelimit == 0) {
+      return;
+    } else {
+      startTimer();
+    }
+  }, [currentQuestionIndex]);
+  // useEffect(() => {
+  //   startTimer();
+  // }, [currentQuestionIndex, handleNextQuestion]);
+  // useEffect(() => {
+  //   const timer = startTimer(); // Call startTimer and store the returned timer reference
+
+  //   return () => {
+  //     clearInterval(timer); // Clear the interval when the component unmounts
+  //   };
+  // }, []);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   // const storeScoreToFirestore = async () => {
   //   try {
@@ -125,11 +203,12 @@ const Questions = ({ singleLesson, teacherClassId, teacherClassQuizEnd }) => {
   //     console.error("Error storing/updating score:", error);
   //   }
   // };
+  const MemoizedQuestion = React.memo(Question);
 
   if (questions.length === 0) {
     return <div>No questions available</div>;
   }
-  console.log(singleLesson);
+  // console.log(singleLesson);
   if (quizEnd) {
     return navigate(
       `result?lessonName=${singleLesson.lessonName}&chapterId=${singleLesson.chapterId}&userId=${userId}&lessonId=${singleLesson.id}&score=${score}&questionsLength=${questions.length}&classId=${teacherClassId}&classEndTime=${teacherClassQuizEnd}`
@@ -137,12 +216,27 @@ const Questions = ({ singleLesson, teacherClassId, teacherClassQuizEnd }) => {
   }
 
   return (
-    <Question
-      question={currentQuestion?.text}
-      options={currentQuestion?.options}
-      onSelectAnswer={onSelectAnswer}
-      selectedCorrect={selectedCorrect}
-    />
+    <div style={{ width: "100%" }}>
+      {timeLimit > 0 && (
+        <div
+          style={{
+            fontSize: "22px",
+            fontWeight: "bold",
+            marginLeft: "10px",
+            color: "white",
+          }}
+        >
+          {formatTime(remainingTime)}
+        </div>
+      )}
+
+      <MemoizedQuestion
+        question={currentQuestion?.text}
+        options={currentQuestion?.options}
+        onSelectAnswer={onSelectAnswer}
+        selectedCorrect={selectedCorrect}
+      />
+    </div>
   );
 };
 

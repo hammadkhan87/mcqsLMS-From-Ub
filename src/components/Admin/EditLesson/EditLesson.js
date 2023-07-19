@@ -47,7 +47,7 @@ const EditLesson = () => {
     <div className="selfstudy_container">
           <Sidebar getGrade={getGrade} grade={grade} setGrade={setGrade} />
 
-      <div className="selfstudy_container_tab">
+      <div className="selfstudy_container_tab_admin">
         <TabContext value={value}>
 
           <Box sx={{ borderBottom: 1, borderColor: "divider", margin: "auto" }}>
@@ -57,10 +57,7 @@ const EditLesson = () => {
               <Tab label="Math" value="1" />
               <Tab label="Language Arts" value="2" />
               <Tab label="Science" value="3" />
-              <Tab label="Social Studies" value="4" /> 
-
-         
-
+              <Tab label="Social Studies" value="4" />          
             </TabList>
 
           </Box>
@@ -70,7 +67,7 @@ const EditLesson = () => {
               <div className="tabpanel_container_title">
                 {grade} grade {chapterName}
               </div>
-              <div className="tabpanel_container_chapters">
+              <div className="tabpanel_container_chapters_admin">
                 {/* {filterArray.map((element, key) => {
                   return ( */}
                     <SingleChapter
@@ -90,7 +87,7 @@ const EditLesson = () => {
               <div className="tabpanel_container_title">
                 {grade} grade {chapterName}
               </div>
-              <div className="tabpanel_container_chapters">
+              <div className="tabpanel_container_chapters_admin">
                 {/* {filterArray.map((element, key) => {
                   return ( */}
                     <SingleChapter
@@ -110,7 +107,7 @@ const EditLesson = () => {
               <div className="tabpanel_container_title">
                 {grade} grade {chapterName}
               </div>
-              <div className="tabpanel_container_chapters">
+              <div className="tabpanel_container_chapters_admin">
                 {/* {filterArray.map((element, key) => {
                   return ( */}
                     <SingleChapter
@@ -130,7 +127,7 @@ const EditLesson = () => {
               <div className="tabpanel_container_title">
                 {grade} grade {chapterName}
               </div>
-              <div className="tabpanel_container_chapters">
+              <div className="tabpanel_container_chapters_admin">
                 {/* {filterArray.map((element, key) => {
                   return ( */}
                     <SingleChapter

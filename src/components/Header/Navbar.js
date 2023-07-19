@@ -88,7 +88,7 @@ const Navbar = ({ role, isLogin,placement,onChange ,showDrawer}) => {
         </Link>
         {/* {name} */}
         <div className="left-side">
-          <Link to="selfstudy">
+          <Link to="/selfstudy">
             <p>Self Study</p>
           </Link>
           {role == "Admin" && (

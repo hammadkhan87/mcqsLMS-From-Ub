@@ -8,9 +8,9 @@ import { FiList } from "react-icons/fi";
 import { MdGrade } from "react-icons/md";
 import Preview from "./Preview/Preview";
 import { useLocation, useNavigate } from "react-router-dom";
-import { query } from "firebase/firestore";
+import { query,doc,getDoc, } from "firebase/firestore";
 import { duration } from "@mui/material";
-import { firebaseConfig } from "../../../../firebase";
+import {db, firebaseConfig } from "../../../../firebase";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -54,6 +54,8 @@ const SearchQuiz = () => {
   const [grade, setGrade] = useState("");
   const [subject, setSubject] = useState("");
   const [open, setOpen] = useState(false);
+  const [singleLesson, setSingleLesson] = useState({});
+
   const navigate=useNavigate()
   const handleOpenPreview = () => {
     setOpen(true);
@@ -63,35 +65,104 @@ const SearchQuiz = () => {
     setOpen(false);
   };
   console.log(searchQuery);
-  const fetchLessons = async () => {
-    const lessonSnapshot = await firebase
-      .firestore()
-      .collection("lessonQuiz")
-      .where("quizType", "in", ["self", "public"])
-      .get();
+  const fetchLessons = async (page) => {
+    // const lessonSnapshot = await firebase
+    //   .firestore()
+    //   .collection("lessonQuiz")
+    //   .where("quizType", "in", ["self", "public"])
+    //   .where("grade", "in", selectedGrades)
+    //   .where("subject", "in", selectedSubjects)
+    //   .get();
+    let query = firebase.firestore().collection("lessonQuiz").where("quizType", "in", ["self", "public"]);
 
+    if (selectedGrades.length > 0) {
+      query = query.where("grade", "in", selectedGrades);
+    }
+  
+    if (selectedSubjects.length > 0) {
+      query = query.where("subject", "in", selectedSubjects);
+    }
+    // if (searchTerm) {
+    //   query = query.where("lessonName", ">=", searchTerm.toLowerCase()).where("lessonName", "<=", searchTerm.toLowerCase() + "\uf8ff");
+    // }
+ if (searchTerm) {
+    const searchLower = searchTerm.toLowerCase();
+    query = query.where("lessonName", ">=", searchLower).where("lessonName", "<=", searchLower + "\uf8ff");
+  }
+    // Calculate the start and end indices based on the current page and results per page
+    // const startIndex = (page - 1) * resultsPerPage;
+    // const endIndex = startIndex + resultsPerPage;
+    // const startIndex = lessons.length;
+
+    // // Fetch the lessons and count the total number of results
+    // // const [lessonsSnapshot, totalSnapshot] = await Promise.all([
+    // //   query.limit(endIndex).get(),
+    // //   query.get(),
+    // // ]);
+    // const lessonsSnapshot = await query.startAfter(startIndex).limit(resultsPerPage).get();
+
+  
+    const lessonSnapshot = await query.get();
     const searchedLessons = lessonSnapshot.docs
       .map((doc) => ({
+      // const searchedLessons = lessonsSnapshot.docs.map((doc) => ({
+
         id: doc.id,
-        ...doc.data(),
+        lessonName: doc.data().lessonName,
+        lessonImage: doc.data().lessonImage,
+        grade: doc.data().grade,
+        questionsSize: doc.data().questions.length,
+
+        // ...doc.data(),
       }))
-      .filter((lesson) => {
-        const gradeMatch =
-          selectedGrades.length === 0 || selectedGrades.includes(lesson.grade);
-        const subjectMatch =
-          selectedSubjects.length === 0 ||
-          selectedSubjects.includes(lesson.subject);
-        const nameMatch = lesson.lessonName
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-        return gradeMatch && subjectMatch && nameMatch;
-      });
+      // .filter((lesson) => {
+      //   const gradeMatch =
+      //     selectedGrades.length === 0 || selectedGrades.includes(lesson.grade);
+      //   const subjectMatch =
+      //     selectedSubjects.length === 0 ||
+      //     selectedSubjects.includes(lesson.subject);
+      //   const nameMatch = lesson.lessonName
+      //     .toLowerCase()
+      //     .includes(searchTerm.toLowerCase());
+      //   return gradeMatch && subjectMatch && nameMatch;
+      // });
 
     setLessons(searchedLessons);
+    // setLessons((prevLessons) => [...prevLessons, ...searchedLessons]);
+
+    // setTotalResults(totalSnapshot.size);
   };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const fetchedDataLessons = async (collectionName,id) => {
+    const docRef = doc(db, collectionName, id);
+    const docSnapshot = await getDoc(docRef);
+    if (docSnapshot.exists()) {
+      const data = docSnapshot.data();
+      setSingleLesson({ ...data, id: docSnapshot.id });
+  //   const docSnapshot = await getDoc(docRef);
+  // if (docSnapshot.exists()) {
+  //   const lessonName = docSnapshot.data().lessonName;
+  //   const questionsSize = docSnapshot.data().questions.length;
+  //   const lessonId = docSnapshot.id;
+  //   const lessonData = { lessonName, questionsSize, id: lessonId };
+  //   setSingleLesson(lessonData);
+  setLessonName(data?.lessonName);
+  setQuestions(data?.questions);
+  setLessonid(docSnapshot.id);
+  setChapterid(data?.chapterId);
+  setLessonImage(data?.lessonImage);
+  setSubject(data?.subject);
+  setGrade(data?.grade);
+  setTotalDuration(data?.totalDuration);
+  setTotalMarks(data?.totalMarks);
+
+    } else {
+      console.log("Document not found!");
+    }
   };
 
   const handleGradeChange = (event) => {
@@ -102,6 +173,8 @@ const SearchQuiz = () => {
       setSelectedGrades((prevGrades) => prevGrades?.filter((g) => g !== grade));
     }
   };
+
+
 
   const handleSubjectChange = (event) => {
     const subject = event.target.value;
@@ -120,38 +193,41 @@ const SearchQuiz = () => {
     }
   }, [searchTerm, selectedGrades, selectedSubjects]);
   const handlecardclick = (
-    name,
-    question,
+    // name,
+    // question,
     id,
-    chapid,
-    img,
-    sub,
-    grade,
-    duration,
-    mark
+    // chapid,
+    // img,
+    // sub,
+    // grade,
+    // duration,
+    // mark
   ) => {
+
+    fetchedDataLessons("lessonQuiz",id)
+
     if (window.innerWidth < 700) {
       handleOpenPreview();
     }
 
-    setLessonName(name);
-    setQuestions(question);
-    setLessonid(id);
-    setChapterid(chapid);
-    setLessonImage(img);
-    setSubject(sub);
-    setGrade(grade);
-    setTotalDuration(duration);
-    setTotalMarks(mark);
+    // setLessonName(name);
+    // setQuestions(question);
+    // setLessonid(id);
+    // setChapterid(chapid);
+    // setLessonImage(img);
+    // setSubject(sub);
+    // setGrade(grade);
+    // setTotalDuration(duration);
+    // setTotalMarks(mark);
   };
 
-  useEffect(() => {}, [
-    lessonid,
-    chapterid,
-    lessonName,
-    questions,
-    handlecardclick,
-  ]);
+  // useEffect(() => {}, [
+  //   lessonid,
+  //   chapterid,
+  //   lessonName,
+  //   questions,
+  //   handlecardclick,
+  // ]);
 
   return (
     <>
@@ -359,15 +435,15 @@ const SearchQuiz = () => {
                       key={index}
                       onClick={() =>
                         handlecardclick(
-                          lesson.lessonName,
-                          lesson.questions,
+                          // lesson.lessonName,
+                          // lesson.questions,
                           lesson.id,
-                          lesson.chapterId,
-                          lesson.lessonImage,
-                          lesson.subject,
-                          lesson.grade,
-                          lesson.totalDuration,
-                          lesson.totalMarks
+                          // lesson.chapterId,
+                          // lesson.lessonImage,
+                          // lesson.subject,
+                          // lesson.grade,
+                          // lesson.totalDuration,
+                          // lesson.totalMarks
                         )
                       }
                     >
@@ -387,7 +463,7 @@ const SearchQuiz = () => {
                             <FiList className="explore_icon" />
                             <p className="explore_text-a">
                               {" "}
-                              {lesson.questions.length} Questions
+                              {lesson.questionsSize} Questions
                             </p>
                           </div>
                           <div className="explore_text-a">

@@ -35,9 +35,9 @@ const Passed = () => {
     const documentSnapshot = await getDoc(classRef);
 
     if (documentSnapshot.exists()) {
-      const data = documentSnapshot.data();
+      const quizes = documentSnapshot.data().quizes;
 
-      const futureObjects = data?.quizes?.filter((quiz) => {
+      const futureObjects = quizes?.filter((quiz) => {
         const endDateTime = new Date(quiz.end);
         const currentDateTime = new Date();
 
@@ -45,7 +45,7 @@ const Passed = () => {
       });
 
       setPassedObjects(futureObjects);
-      console.log("Future Objects:", futureObjects);
+      // console.log("Future Objects:", futureObjects);
     } else {
       console.log("Document not found.");
     }
@@ -58,7 +58,7 @@ const Passed = () => {
     <div className="div-of-div-b">
       <div className="main-div-quizes-p">
         {passedobjects?.map((classItem, index) => {
-          console.log(classItem);
+          // console.log(classItem);
           return (
             <div key={index} className="inner-class-div-a-p">
               <Link

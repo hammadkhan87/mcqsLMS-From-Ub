@@ -9,6 +9,7 @@ import {
   deleteDoc,
   query,
   where,
+  
 } from "firebase/firestore";
 import { db, firebaseConfig } from "../../../../firebase";
 import firebase from "firebase/compat/app";
@@ -24,6 +25,7 @@ const SingleChapter = ({ chapterName, grade }) => {
   const [lessonimage, setLessonimage] = useState(null);
   const [updatedname, setUpdatedName] = useState("");
   const [filterArray, setFilterArray] = useState([]);
+  const [change,setChange] = useState("")
 
   const handleInputimage = (e) => {
     setLessonimage(e.target.files[0]);
@@ -75,6 +77,8 @@ const SingleChapter = ({ chapterName, grade }) => {
       await updateDoc(lessonRef, updatedData);
       toast.success("Data Updated");
       console.log("update successfully");
+      setChange("aaa")
+
       handleCancel();
     } catch (error) {
       toast.error("Error updating lesson");
@@ -88,6 +92,7 @@ const SingleChapter = ({ chapterName, grade }) => {
       await deleteDoc(lessonRef);
       toast.success("Lesson deleted successfully");
       console.log("Lesson deleted successfully");
+      setChange("dd")
     } catch (error) {
       toast.error("Error deleting lesson");
       console.error("Error deleting lesson:", error);
@@ -114,6 +119,8 @@ const SingleChapter = ({ chapterName, grade }) => {
       if (chapterSnapshot.empty) {
         await deleteDoc(chapterRef);
         console.log("Chapter deleted successfully");
+        setChange("aba")
+
       } else {
         chapterSnapshot.forEach(async (snapshot) => {
           const lessonRef = doc(db, "lessonQuiz", snapshot.id);
@@ -129,26 +136,67 @@ const SingleChapter = ({ chapterName, grade }) => {
   };
 
   const fetchedDataChapters = async (collectionName) => {
-    try {
-      const querySnapshot = await getDocs(collection(db, collectionName));
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setChapters(newData);
-    } catch (error) {
-      console.error("Error fetching chapters:", error);
-    }
-  };
+  //   try {
+  //     const querySnapshot = await getDocs(collection(db, collectionName));
+  //     const newData = querySnapshot.docs.map((doc) => ({
+  //       ...doc.data(),
+  //       id: doc.id,
+  //     }));
+  //     setChapters(newData);
+  //   } catch (error) {
+  //     console.error("Error fetching chapters:", error);
+  //   }
+  // };
+  try {
+      
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, collectionName),
+        where("subject", "==", chapterName),
+        where("grade", "array-contains", grade)
+        )
+    );
 
-  const fetchedDataLessons = async (collectionName) => {
+    const newData = querySnapshot.docs.map((doc) => ({
+      title: doc.data().title, // Retrieve only the 'title' field
+      id: doc.id,
+    }));
+
+    //  console.log(newData);
+    setChapters(newData);
+    setFilterArray(newData);
+    fetchedDataLessons("lessonQuiz", newData);
+
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    toast.error("Error fetching Chapters")
+  }
+};
+
+
+  const fetchedDataLessons = async (collectionName,filterArray) => {
     try {
-      const querySnapshot = await getDocs(collection(db, collectionName));
+      // const querySnapshot = await getDocs(collection(db, collectionName));
+      // const newData = querySnapshot.docs.map((doc) => ({
+      //   ...doc.data(),
+      //   id: doc.id,
+      // }));
+      const filterIds = filterArray?.map((item) => item.id);
+      if (filterIds && filterIds.length > 0) {
+
+      const querySnapshot = await getDocs(
+        query(collection(db, collectionName), where("chapterId", "in", filterIds))
+      );
+      console.log(querySnapshot.docs)
       const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
+        // ...doc.data(),
+        lessonName: doc.data().lessonName,
+        chapterId: doc.data().chapterId,
+        lessonImage: doc.data().lessonImage,
         id: doc.id,
       }));
       setLessonsa(newData);
+    }
     } catch (error) {
       console.error("Error fetching lessons:", error);
     }
@@ -156,24 +204,26 @@ const SingleChapter = ({ chapterName, grade }) => {
 
   useEffect(() => {
     fetchedDataChapters("chapters");
-    fetchedDataLessons("lessonQuiz");
-  }, [updateLesson,deleteChapter]);
 
-  useEffect(() => {
-    const filteredData = chapters.filter((chap) => {
-      return chap.subject === chapterName && chap.grade.includes(grade);
-    });
-    setFilterArray(filteredData);
-  }, [chapters, chapterName, grade]);
+  }, [change,chapterName,grade]);
+
+  // useEffect(() => {
+  //   const filteredData = chapters.filter((chap) => {
+  //     return chap.subject === chapterName && chap.grade.includes(grade);
+  //   });
+  //   setFilterArray(filteredData);
+  // }, [chapters, chapterName, grade]);
 
   return (
-    <>
-      {filterArray.map((element, key) => {
-        const id = element.id;
+    <> 
+   {  lessonsa && filterArray?.map((element, key) => {
+           const id = element.id;
         const filteredLessons = lessonsa.filter((lessona) => {
           return lessona.chapterId === id;
         });
-
+        
+         console.log(filteredLessons)
+         console.log(lessonsa)
         return (
           <div className="selfsinglechapter_container" key={key}>
             <div className="selfsinglechapter_container_heading">
@@ -186,7 +236,7 @@ const SingleChapter = ({ chapterName, grade }) => {
               </button>
             </div>
             <div className="selfsinglechapter_container_heading_lessons">
-              {filteredLessons.map((lesson, key) => {
+              {filteredLessons?.map((lesson, key) => {
                 return (
                   <div key={key} className="selfsinglechapter_container_lesson">
                     <div className="innerSingleChapter_container">
@@ -253,7 +303,7 @@ const SingleChapter = ({ chapterName, grade }) => {
                 );
               })}
             </div>
-            
+         
           </div>
         );
       })}

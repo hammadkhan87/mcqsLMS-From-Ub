@@ -56,6 +56,7 @@ const HomePage = () => {
       toast.success("You Are Successfully Added");
     } catch (e) {
       console.error("Error adding document: ", e);
+      toast.error("Error adding ")
     }
   };
 

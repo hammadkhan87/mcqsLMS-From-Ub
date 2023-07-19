@@ -104,8 +104,8 @@ const DynamicStatistic = () => {
 
   const getTotallessonQuiz = async () => {
     try {
-      const docRef = collection(db, "lessonQuiz");
-      const querySnapshot = await getDocs(query(docRef));
+       const docRef = collection(db, "lessonQuiz");
+      const querySnapshot = await getDocs(query(docRef)); 
       const query2Snapshot = await getDocs(
         query(docRef, where("createdAt", ">=", startTimestamp))
       );

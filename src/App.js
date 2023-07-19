@@ -113,13 +113,14 @@ function App() {
       /> */}
 
       <Suspense fallback={<LoadingScreen />}>
+        
         <Routes>
           <Route path="/">
             <Route index element={<HomePage />} />
             <Route path="student-coderoom/:id" element={<StudentCodeRoom />} />
             <Route path="courselist/:id" element={<CoursesList />} />
             <Route
-              path="selfstudy"
+              path="/selfstudy"
               element={<SelfStudy isLogin={isLogin} />}
             ></Route>
             <Route path="selfstudy/ground/:id/:name" element={<SelfGround />} />
@@ -180,10 +181,10 @@ function App() {
               element={<StudentClass />}
             />
             {/* <Route path="/admin-dashboard" element={<Dashboard />} /> */}
+            {role == "Admin" &&       
+           <Route path="/admin-dashboard" element={<ADminDashboard/>} /> }
             <Route path="/self-search-quiz" element={<SearchQuizb />} />
-            <Route path="/admin-dashboard" element={<ADminDashboard/>} />
             <Route path="/student-classes" element={<StudentPortalB />} />
-            <Route path="/admin-create-quiz" exact element={<CreateQuiz />} />
             <Route path="/student-portal" exact element={<StudentPortal />} />
             <Route path="self-search-quiz" element={<SearchQuizb />} />
             <Route path="classroom/search" element={<SearchQuiz />} />

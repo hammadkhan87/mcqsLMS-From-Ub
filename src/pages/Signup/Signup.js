@@ -11,7 +11,7 @@ import {
   sendPasswordResetEmail,
   signInWithPopup,
 } from "firebase/auth";
-import { auth, db,firebaseConfig } from "../../firebase";
+import { auth, db, firebaseConfig } from "../../firebase";
 import {
   addDoc,
   collection,
@@ -127,16 +127,22 @@ const Signup = () => {
         createdAt: serverTimestamp(),
       };
       localStorage.setItem("userData", JSON.stringify(userData));
-      if (role === "Teacher") {
-        navigate("/classroom");
-      } else {
-        setSignupCompleted(true);
-        setnewData(userData);
-        if (!classroom) {
-          navigate("/");
-        }
-      }
+
+     
       
+        if (role === "Teacher") {
+          navigate("/classroom/explore");
+        } else {
+          setSignupCompleted(true);
+          setnewData(userData);
+          if (!classroom) {
+            navigate("/");
+          }
+        }
+        setTimeout(()=>{
+          window.location.reload();
+
+        },2)
     } catch (error) {
       console.log("Error in creating user:", error);
       toast.error("Error in creating user:", error);
@@ -263,7 +269,6 @@ const Signup = () => {
       handleJoinNow(newdata);
     }
   }, [signupCompleted, classroom]);
-
 
   return (
     <div className="container">

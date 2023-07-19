@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./Question.scss";
 
-const Question = ({
-  question,
-  options,
-  onSelectAnswer,
- 
-}) => {
-
-
+const Question = ({ question, options, onSelectAnswer }) => {
   const handleKeyDown = (event, option) => {
     if (event.key === "Enter") {
       onSelectAnswer(option.text);
     }
   };
 
+  
   return (
     <div className="questions_container">
       <div className="questions_question">{question}</div>
-      <div className="answers ">
+      <div className="answers">
         {options.map((option, key) => {
           return (
             <span
@@ -35,7 +29,6 @@ const Question = ({
           );
         })}
       </div>
-     
     </div>
   );
 };

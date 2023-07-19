@@ -38,7 +38,7 @@ const style = {
   p: 4,
 };
 
-const SelfStudy = ({showDrawer}) => {
+const SelfStudy = ({ showDrawer }) => {
   const localData = localStorage.getItem("userData");
   const id = localData ? JSON.parse(localData).userId : null;
   const [users, setUsers] = useState([]);
@@ -77,23 +77,31 @@ const SelfStudy = ({showDrawer}) => {
 
       setSelfStudents(uniqueUsers);
       console.log(uniqueUsers, "self");
+      fetchResults(uniqueUsers)
     } catch (error) {
       console.error("Error fetching self students: ", error);
     }
   };
-  const fetchResults = async () => {
+  const fetchResults = async (students) => {
     try {
-      const resultsSnapshot = await getDocs(collection(db, "result"));
-      const results = resultsSnapshot.docs.map((doc) => doc.data());
+      const filterIds = students?.map((item) => item.studentRef);
+      if (filterIds && filterIds.length > 0) {
+
+      const resultsSnapshot = await getDocs(query(collection(db, "result"),where("userId","in",filterIds)));
+      const results = resultsSnapshot.docs .map((doc) => {
+        // Return an object with id, userId, and givenat fields
+        return { id: doc.id, userId: doc.data().userId, givenAt: doc.data().givenAt };
+      });
       setResult(results);
-      console.log(results, "results");
+      // console.log(results, "results");
+    }
     } catch (error) {
       console.error("Error fetching results: ", error);
     }
   };
   useEffect(() => {
     fetchSelfStudent();
-    fetchResults();
+   
   }, []);
   const handleGenerate = () => {
     // const randCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -101,7 +109,7 @@ const SelfStudy = ({showDrawer}) => {
 
     setLink(links);
   };
-
+  // console.log(selfStudents);
   const handleCopy = () => {
     navigator.clipboard
       .writeText(link)
@@ -120,12 +128,12 @@ const SelfStudy = ({showDrawer}) => {
     <>
       <div className="class_selfstudy_container_classroom">
         <div className="class_selfstudy_container_classroom_main">
-        <div className="mylibrary_sidebar_title_menu" onClick={showDrawer}>
-          <IoMenuOutline />
-        </div>
+          <div className="mylibrary_sidebar_title_menu" onClick={showDrawer}>
+            <IoMenuOutline />
+          </div>
           <div className="class_selfstudy_container_classroom_main_header">
             <div className="class_selfstudy_container_classroom_main_header_total">
-              Student(12)
+              Student({selfStudents.length})
             </div>
             <div
               onClick={handleOpen}

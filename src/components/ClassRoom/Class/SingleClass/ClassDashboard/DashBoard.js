@@ -16,6 +16,7 @@ import {
   getDocs,
   query,
   where,
+  limit,
   serverTimestamp,
 } from "firebase/firestore";
 firebase.initializeApp(firebaseConfig);
@@ -37,15 +38,17 @@ const DashBoard = () => {
     const documentSnapshot = await getDoc(classRef);
 
     if (documentSnapshot.exists()) {
-      const data = documentSnapshot.data();
-      const futureObjects = data?.quizes?.filter((quiz) => {
+      // const data = documentSnapshot.data();
+      const quizes = documentSnapshot.data()?.quizes;
+
+      const futureObjects = quizes?.filter((quiz) => {
         const startDateTime = new Date(quiz.start);
         const endDateTime = new Date(quiz.end);
         const currentDateTime = new Date();
         return currentDateTime > startDateTime && currentDateTime < endDateTime;
       });
       setProcessedObjects(futureObjects);
-      console.log("Future Objects:", futureObjects);
+      // console.log("Future Objects:", futureObjects);
     } else {
       console.log("Document not found.");
     }
@@ -54,15 +57,15 @@ const DashBoard = () => {
     const classRef = doc(db, "classes", documentId);
     const documentSnapshot = await getDoc(classRef);
     if (documentSnapshot.exists()) {
-      const data = documentSnapshot.data();
-      const futureObjects = data?.quizes?.filter((quiz) => {
+      const quizes = documentSnapshot.data()?.quizes;
+      const futureObjects = quizes?.filter((quiz) => {
         const startDateTime = new Date(quiz.start);
         const currentDateTime = new Date();
 
         return startDateTime > currentDateTime;
       });
       setsheduledquizes(futureObjects);
-      console.log("Future Objects:", futureObjects);
+      // console.log("Future Objects:", futureObjects);
     } else {
       console.log("Document not found.");
     }
@@ -73,9 +76,10 @@ const DashBoard = () => {
     const documentSnapshot = await getDoc(classRef);
 
     if (documentSnapshot.exists()) {
-      const data = documentSnapshot.data();
+      // const data = documentSnapshot.data();
+      const quizes = documentSnapshot.data()?.quizes;
 
-      const futureObjects = data?.quizes?.filter((quiz) => {
+      const futureObjects = quizes?.filter((quiz) => {
         const endDateTime = new Date(quiz.end);
         const currentDateTime = new Date();
 
@@ -83,7 +87,7 @@ const DashBoard = () => {
       });
 
       setPassedObjects(futureObjects);
-      console.log("Future Objects:", futureObjects);
+      // console.log("Future Objects:", futureObjects);
     } else {
       console.log("Document not found.");
     }

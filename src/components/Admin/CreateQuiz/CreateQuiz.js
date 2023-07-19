@@ -10,6 +10,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import { RiImageAddLine } from "react-icons/ri";
 
+
 import {
   addDoc,
   collection,
@@ -32,6 +33,7 @@ const CreateQuiz = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [loading, setLoading] = useState(false);
   const [chapterRefId, setChapterRefId] = useState(null);
   const [selected_book, setSelected_book] = useState("");
   const [chapter, setChapter] = useState("");
@@ -44,7 +46,7 @@ const CreateQuiz = () => {
   const [openFill, setOpenFill] = useState(false);
   const [mark, setMark] = useState("1.0");
   const [lessonimage, setLessonImage] = useState(null);
-  const [duration, setDuration] = useState("1.0");
+  const [duration, setDuration] = useState("0");
   const [lessonName, setLessonName] = useState("");
   const [AllQuestions, setAllQuestions] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -52,10 +54,10 @@ const CreateQuiz = () => {
   const [chapters, setChapters] = useState([]);
   const [filterArray, setFilterArray] = useState([]);
   const [showlessonimage, setShowlessonimage] = useState(null);
-  const localData = localStorage.getItem("userData")
-  const role = localData?JSON.parse(localData).role: null;
-  const ref_id = localData?JSON.parse(localData).userId: null;
-  console.log(role)
+  const localData = localStorage.getItem("userData");
+  const role = localData ? JSON.parse(localData).role : null;
+  const ref_id = localData ? JSON.parse(localData).userId : null;
+  // console.log(role);
   let chapterName;
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -64,30 +66,36 @@ const CreateQuiz = () => {
   };
 
   const options = filterArray.map((item) => item.title);
-  console.log(filterArray);
-
   const fetchedData = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setChapters(newData);
+
+    try {
+      
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, collectionName),
+          where("subject", "==", selected_book),
+          where("grade", "array-contains", selectedOptions),
+          )
+      );
+
+      const newData = querySnapshot.docs.map((doc) => ({
+        title: doc.data().title, // Retrieve only the 'title' field
+        id: doc.id,
+      }));
+
+      //  console.log(newData);
+      setChapters(newData);
+      setFilterArray(newData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Error fetching Chapters")
+    }
   };
 
   useEffect(() => {
     fetchedData("chapters");
-  }, []);
+  }, [selected_book, selectedOptions]);
 
-  useEffect(() => {
-    const filteredData = chapters.filter((chap) => {
-      return (
-        chap.subject == selected_book && chap.grade.includes(selectedOptions)
-      );
-    });
-    setFilterArray(filteredData);
-  }, [chapters, selected_book, selectedOptions]);
-  console.log(filterArray);
 
   const handleSelectAll = (e) => {
     e.preventDefault();
@@ -176,7 +184,6 @@ const CreateQuiz = () => {
     } else {
       console.log("No chapter found with the given title.");
     }
-    
   }, [options]);
 
   const storeData = async (
@@ -189,6 +196,7 @@ const CreateQuiz = () => {
     questions
   ) => {
     try {
+      setLoading(true);
       // Upload lesson image to Firebase Storage (if it exists)
       let imageURL = "";
       if (lessonImage) {
@@ -302,11 +310,13 @@ const CreateQuiz = () => {
       } else {
         const timestamp = serverTimestamp();
 
-        const randomId = Math.floor(1000000 + Math.random() * 9000000).toString();
+        const randomId = Math.floor(
+          1000000 + Math.random() * 9000000
+        ).toString();
 
         const docRef = doc(db, "lessonQuiz", randomId);
         const docSnapshot = await getDoc(docRef);
-        
+
         if (!docSnapshot.exists()) {
           const docData = {
             chapterId,
@@ -323,7 +333,7 @@ const CreateQuiz = () => {
             refId: ref_id,
             createdAt: timestamp,
           };
-        
+
           await setDoc(docRef, docData);
           //alert();
           toast.success("Quiz added successfully");
@@ -337,6 +347,8 @@ const CreateQuiz = () => {
       console.log("Data stored successfully!");
     } catch (error) {
       console.error("Error storing data:", error);
+    } finally {
+      setLoading(false); // Set loading state to false
     }
   };
 
@@ -355,9 +367,9 @@ const CreateQuiz = () => {
       selectedItems
     );
   };
-  
+
   return (
-    <div className="quiz-main-div">
+    <div className={`quiz-main-div ${loading ? "blur-page" : ""}`}>
       <h2 className="A-h2">Create Quiz</h2>
       <form className="form-1">
         <div className="div-1">
@@ -611,7 +623,7 @@ const CreateQuiz = () => {
               onChange={handleImageChange}
               required
             /> */}
-            {console.log(lessonimage)}
+            {/* {console.log(lessonimage)} */}
             <img
               style={
                 showlessonimage
@@ -704,11 +716,12 @@ const CreateQuiz = () => {
                 <div>
                   <label htmlFor="">Duration Per Question?</label>
                   <select
-                    defaultValue={"1.0"}
+                    defaultValue={"0"}
                     onChange={(e) => setDuration(e.target.value)}
                     className="select"
                     required
                   >
+                    <option value={"0"}> min</option>
                     <option value={"0.5"}>0.5 min</option>
                     <option value={"1.0"}>1.0 min</option>
                     <option value={"1.5"}>1.5 min</option>
@@ -829,12 +842,13 @@ const CreateQuiz = () => {
           <button
             className="btnn"
             type="submit"
-            onClick={(e) => handleSubmit(e,"public")}
+            onClick={(e) => handleSubmit(e, "public")}
           >
             Submit publicly
           </button>
         </div>
       </form>
+      {loading && <div className="loading-toast">Uploading...</div>}
     </div>
   );
 };

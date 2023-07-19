@@ -70,15 +70,7 @@ const Schedule = ({ classroom }) => {
 
   console.log(startDateTime);
 
-  useEffect(() => {
-    fetchFutureObjects(searchQuery);
-
-    fetchImportantDocs();
-    fetchLikeDocs();
-    fetchLessonQuiz();
-    fetchTeacherFolders();
-    // Call the fetchLessonQuiz function with your dynamic values
-  }, []);
+ 
 
   const handleStartDateTimeChange = (event) => {
     const newtime = new Date(event.target.value);
@@ -95,12 +87,12 @@ const Schedule = ({ classroom }) => {
 
   const fetchImportantDocs = async () => {
     try {
-      const importantRef = collection(db, "important");
-      const q = query(importantRef, where("userId", "==", t_id));
+      const importantRef = collection(db, "lessonQuiz");
+      const q = query(importantRef, where("userId", "==", t_id),where("Folder","==","Important"));
       const snapshot = await getDocs(q);
       const docs = snapshot?.docs?.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
+        quizId: doc.id,
+        lessonName:doc.data().lessonName,
       }));
       setImportantDocs(docs);
     } catch (error) {
@@ -110,12 +102,12 @@ const Schedule = ({ classroom }) => {
 
   const fetchLikeDocs = async () => {
     try {
-      const likeRef = collection(db, "likes");
-      const q = query(likeRef, where("userId", "==", t_id));
+      const likeRef = collection(db, "lessonQuiz");
+      const q = query(likeRef, where("userId", "==", t_id),where("Folder","==","Like"));
       const snapshot = await getDocs(q);
       const docs = snapshot?.docs?.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
+        quizId: doc.id,
+        lessonName:doc.data().lessonName,
       }));
       setLikeDocs(docs);
     } catch (error) {
@@ -134,7 +126,9 @@ const Schedule = ({ classroom }) => {
       const snapshot = await getDocs(q);
       const data = snapshot?.docs?.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        quizId :doc.id,
+        lessonName:doc.data().lessonName,
+
       }));
       setLessonQuizData(data);
     } catch (error) {
@@ -212,8 +206,8 @@ const Schedule = ({ classroom }) => {
     if (selectedQuiz) {
       setFinalselectedid(selectedQuiz.id);
       setFinalselectedname(selectedQuiz.lessonName);
-      console.log("Selected Lesson Quiz ID:", selectedQuiz.id);
-      console.log("Selected Lesson Quiz name:", selectedQuiz.lessonName);
+      // console.log("Selected Lesson Quiz ID:", selectedQuiz.id);
+      // console.log("Selected Lesson Quiz name:", selectedQuiz.lessonName);
     }
   };
 
@@ -243,7 +237,7 @@ const Schedule = ({ classroom }) => {
       const snapshot = await getDocs(q);
       const data = snapshot?.docs?.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        lessonName:doc.data().lessonName,
       }));
       setLessonFolderData(data);
     } catch (error) {
@@ -256,9 +250,9 @@ const Schedule = ({ classroom }) => {
     const documentSnapshot = await getDoc(classRef);
 
     if (documentSnapshot.exists()) {
-      const data = documentSnapshot.data();
+      const quizes = documentSnapshot.data().quizes;
 
-      const futureObjects = data?.quizes?.filter((quiz) => {
+      const futureObjects = quizes?.filter((quiz) => {
         const startDateTime = new Date(quiz.start);
         const currentDateTime = new Date();
 
@@ -338,7 +332,15 @@ const Schedule = ({ classroom }) => {
       }
     }
   };
+  useEffect(() => {
+    fetchFutureObjects(searchQuery);
 
+    fetchImportantDocs();
+    fetchLikeDocs();
+    fetchLessonQuiz();
+    fetchTeacherFolders();
+    // Call the fetchLessonQuiz function with your dynamic values
+  }, []);
   return (
     <div className="Schedule-main-div">
       <button className="add-btn-ab" onClick={showModal}>

@@ -4,24 +4,46 @@
 }
 .MuiTabs-flexContainer {
   justify-content: center;
+  width: 100%;
 }
 
 .selfstudy_container {
   display: flex;
-  .selfstudy_container_tab {
-    left: 150px;
+  width: 100%;
+
+  .selfstudy_container_tab_admin {
+    left: 100px;
     height: 500px;
+    
+    width: 100%;
+ 
+     
+ 
+
     .tabpanel_container {
-      .tabpanel_container_title {
-        font-size: 33px;
-        font-weight: 700;
-        font-family: $family;
-        color: $blue;
-        text-transform: capitalize;
-        margin-bottom: 40px;
-      }
-      .tabpanel_container_chapters {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-wrap: wrap;
+        .tabpanel_container_title {
+          font-size: 33px;
+          font-weight: 700;
+          font-family: $family;
+          color: $blue;
+          text-transform: capitalize;
+          margin-bottom: 30px;
+       
+        }
+        .tabpanel_container_chapters_admin {
+          height: 450px;
+          box-sizing: border-box;
+          scroll-behavior: smooth;
+          overflow-y: auto; /* Add a vertical scroll bar */      
       }
     }
   }
+}
+#vertical-tabpanel-3{
+  width: 85%;
+
 }

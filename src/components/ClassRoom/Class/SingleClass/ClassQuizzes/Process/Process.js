@@ -35,9 +35,9 @@ const Process = () => {
     const documentSnapshot = await getDoc(classRef);
 
     if (documentSnapshot.exists()) {
-      const data = documentSnapshot.data();
+      const quizes = documentSnapshot.data().quizes;
 
-      const futureObjects = data?.quizes?.filter((quiz) => {
+      const futureObjects =quizes?.filter((quiz) => {
         const startDateTime = new Date(quiz.start);
         const endDateTime = new Date(quiz.end);
         const currentDateTime = new Date();
@@ -46,7 +46,7 @@ const Process = () => {
       });
 
       setProcessedObjects(futureObjects);
-      console.log("Future Objects:", futureObjects);
+      // console.log("Future Objects:", futureObjects);
     } else {
       console.log("Document not found.");
     }

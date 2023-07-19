@@ -260,7 +260,8 @@ const Class = ({showDrawer}) => {
       // Map through the query snapshot and extract the class data
       const fetchedClassesa = querySnapshot?.docs?.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        className: doc.data().className,
+        studentsize: doc.data().students.length,
       }));
 
       // Update the state with the fetched classes
@@ -457,11 +458,11 @@ const Class = ({showDrawer}) => {
           >
             <div className="inner-class-bar" onClick={(e) => handleClassClick(e,classItem)}>
               <p className="single-class-name">{classItem.className}</p>
-              {classItem.students && Array.isArray(classItem.students) && (
+              
               <p className="show-student-text">
-                {classItem.students.length} Students
+                {classItem.studentsize} Students
               </p>
-            )}
+           
               
             </div>
             <CiMenuKebab

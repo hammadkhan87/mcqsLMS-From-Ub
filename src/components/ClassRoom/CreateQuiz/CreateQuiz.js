@@ -36,6 +36,8 @@ const CreateQuiz = ({showDrawer}) => {
   // const [chapterRefId, setChapterRefId] = useState(null);
   const [selected_book, setSelected_book] = useState("");
   // const [chapter, setChapter] = useState("");
+  const [loading, setLoading] = useState(false); 
+
   const [selectedOptions, setSelectedOptions] = useState("");
   const [look, setlook] = useState(true);
   const [lookfill, setlookFill] = useState(true);
@@ -45,7 +47,7 @@ const CreateQuiz = ({showDrawer}) => {
   const [openFill, setOpenFill] = useState(false);
   const [mark, setMark] = useState("1");
   const [lessonimage, setLessonImage] = useState(null);
-  const [duration, setDuration] = useState("1");
+  const [duration, setDuration] = useState("");
   const [lessonName, setLessonName] = useState("");
   const [AllQuestions, setAllQuestions] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -88,14 +90,14 @@ const CreateQuiz = ({showDrawer}) => {
     setSelectedFolder(event.target.value);
   };
 
-  const fetchedData = async (collectionName) => {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    // setChapters(newData);
-  };
+  // const fetchedData = async (collectionName) => {
+  //   const querySnapshot = await getDocs(collection(db, collectionName));
+  //   const newData = querySnapshot.docs.map((doc) => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  //   }));
+  //   // setChapters(newData);
+  // };
 
   useEffect(() => {
     // fetchedData("chapters");
@@ -213,6 +215,7 @@ const CreateQuiz = ({showDrawer}) => {
     questions
   ) => {
     try {
+      setLoading(true);
       // Upload lesson image to Firebase Storage (if it exists)
       let imageURL = "";
       if (lessonImage) {
@@ -381,6 +384,9 @@ if (!docSnapshot.exists()) {
     } catch (error) {
       console.error("Error storing data:", error);
     }
+    finally {
+      setLoading(false); // Set loading state to false
+    }
   };
 
   const totalmarks = selectedItems.length * mark;
@@ -400,7 +406,7 @@ if (!docSnapshot.exists()) {
   };
 
   return (
-    <div className="teacher-quiz-main-div">
+    <div className={`teacher-quiz-main-div ${loading ? "blur-page" : ""}`}>
       <div className="teacher-create-quiz-top-bar">
         <h2 className="A-h2">
         <div className="mylibrary_sidebar_title_menu" onClick={showDrawer}>
@@ -753,11 +759,12 @@ if (!docSnapshot.exists()) {
             </div>
             <div className="s-duration">
               <select
-                defaultValue={"1"}
+                defaultValue={"0"}
                 onChange={(e) => setDuration(e.target.value)}
                 className="select"
                 required
               >
+                <option value={"0.5"}>0 min</option>
                 <option value={"0.5"}>0.5 min</option>
                 <option value={"1.0"}>1.0 min</option>
                 <option value={"1.5"}>1.5 min</option>
@@ -929,6 +936,8 @@ if (!docSnapshot.exists()) {
           </div>
         </div>
       </form>
+      {loading && <div className="loading-toast">Uploading...</div>}
+
     </div>
   );
 };

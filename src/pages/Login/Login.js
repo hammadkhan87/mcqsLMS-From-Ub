@@ -4,6 +4,8 @@ import quiz from "../../images/quiz-logo.png";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db, firebaseConfig } from "../../firebase";
 import firebase from "firebase/compat/app";
+import { ClipLoader } from "react-spinners";
+
 import {
   collection,
   doc,
@@ -23,7 +25,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [classroom, setClassroom] = useState(null);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -31,13 +33,13 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const getUser = () => {};
-  useEffect(() => {
-    getUser();
-  }, []);
+  // const getUser = () => {};
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
   const handleLogin = async (e) => {
     e.preventDefault();
-
+      setLoading(true)
      signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -83,9 +85,9 @@ const Login = () => {
               console.log("Error updating user login count:", error);
             });
           localStorage.setItem("userData", JSON.stringify(matchedUser));
-         
+         setLoading(false)
           if (matchedUser.role === "Teacher") {
-            navigate("/classroom");
+            navigate("/classroom/explore");
           }
           if (matchedUser.role === "Student") {
             if(searchQuery){
@@ -96,9 +98,15 @@ const Login = () => {
             }
 
           }
-          
+          if (matchedUser.role === "Admin") {
+            navigate("/");
+          }
+            
         
-          
+          setTimeout(()=>{
+            window.location.reload();
+  
+          },2)
           //window.location.reload(true);
           // Do something with the matched user
         });
@@ -110,6 +118,7 @@ const Login = () => {
         const errorMessage = error.message;
         toast.error("Error: " + error.message);
         setError(true);
+        setLoading(false)
       });
   };
 
@@ -217,7 +226,8 @@ const Login = () => {
               >
                 Forget Password
               </button>
-              <button className="btn_original">Login</button>
+              <button className="btn_original">                {loading ? <ClipLoader color="#36d7b7" size={15} /> : "Log in"}{" "}
+</button>
             </form>
             {error && <span>Wrong Email an password!</span>}
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Preview.scss";
 import { useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
@@ -68,7 +68,9 @@ const Preview = ({
   const [showCorrectAnswers, setShowCorrectAnswers] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [open, setOpen] = useState(false);
+ 
 
+  
   const handleSelectItem = (item) => {
     if (selectedItems.includes(item)) {
       setSelectedItems((prevItems) =>
@@ -105,7 +107,7 @@ const Preview = ({
       } else {
         const timestamp = serverTimestamp();
 
-        const docRef = collection(db, "DynamicQuiz");
+        const docRef = collection(db, "lessonQuiz");
         const querySnapshot = await getDocs(query(docRef));
 
         if (querySnapshot) {
@@ -122,6 +124,7 @@ const Preview = ({
             role: role,
             refId: ref_id,
             createdAt: timestamp,
+            Folder:"Dynamic"
           };
 
           const newDocRef = await addDoc(docRef, docData);
@@ -169,6 +172,7 @@ const Preview = ({
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div className="preview-main-container">
       {lessonName && (
